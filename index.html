@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Герман Сорокин" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title></title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="./images/header__logo.svg" />
+      <img class="header__line" src="./images/header__line.svg" />
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <img
+          class="profile__pic"
+          src="https://picsum.photos/120"
+          alt="фото профиля"
+        />
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button class="button__edit-info">
+            <img
+              class="button__edit-info_image"
+              src="./images/button__edit-info.svg"
+              alt=""
+            />
+          </button>
+          <h3 class="profile__subtitle">Исследователь океана</h3>
+        </div>
+        <button class="button__new-post">
+          <img
+            class="button__new-post_image"
+            src="./images/button__new-post.svg"
+          />
+        </button>
+        <div class="profile__popup"></div>
+      </section>
+
+      <section class="cards">
+        <div class="card">
+          <img
+            class="card__image"
+            src="https://picsum.photos/282"
+            alt="Иллюстрация"
+          />
+          <div class="card__caption">
+            <h3 class="card__caption_text">Карачаевск</h3>
+            <button class="button__like">
+              <img
+                class="button__like_image"
+                src="./images/button__like.svg"
+                alt="кнопка лайк"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
+    <script src="./script.js"></script>
+  </body>
+</html>
