@@ -1,3 +1,8 @@
 .profile__popup {
-
+  background: white;
+  border-radius: 10px;
+  width: calc(100% - 50px);
+  max-width: 600px;
+  padding: 30px;
+  box-sizing: border-box;
 }
