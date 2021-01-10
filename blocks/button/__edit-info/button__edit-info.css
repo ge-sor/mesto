@@ -1,8 +1,23 @@
 .button__edit-info {
-    padding: 0 0 0 18px;
-     border: none;
-     font: inherit;
-     color: inherit;
-     background-color: transparent;
-     cursor: pointer;
+  background: url(../../../images/button__edit-info.svg) center no-repeat;
+  height: 24px;
+  width: 24px;
+  border: 1px solid white;
+  margin: 0 0 7px 7px;
+  grid-row: 1;
+  grid-column: 3;
+  align-self: end;
+  justify-self: start;
+}
+
+@media screen and (max-width: 930px) {
+  .button__edit-info {
+    width: 18px;
+    height: 18px;
+    grid-row: 4;
+    grid-column: 3;
+    justify-self: center;
+    align-self: center;
+    margin: 5px 0 0 5px;
+  }
 }

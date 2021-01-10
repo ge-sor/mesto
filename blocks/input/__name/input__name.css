@@ -1,0 +1,27 @@
+.input__name {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  width: 358px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(100, 100, 100, .2);
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.input__name::placeholder {
+  color: black;
+}
+
+.input__name:focus {
+  outline: none;
+  border-bottom: 1px solid rgba(100, 100, 100, .2);
+}
+
+@media screen and (max-width: 930px) {
+  .input__name {
+    width: 238px;
+  }
+}

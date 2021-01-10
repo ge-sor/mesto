@@ -1,9 +1,13 @@
 .popup__container {
   background: white;
   border-radius: 10px;
-  width: calc(100% - 50px);
-  max-width: 600px;
+  width: 430px;
+  max-width: 430px;
+  min-width: 282px;
   padding: 30px;
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
+

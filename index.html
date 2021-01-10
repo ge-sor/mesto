@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="Сайт для " />
+    <meta name="keywords" content="фото путешествия" />
     <meta name="author" content="Герман Сорокин" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title></title>
@@ -13,7 +13,6 @@
   <body class="page">
     <header class="header">
       <img class="header__logo" src="./images/header__logo.svg" />
-      <img class="header__line" src="./images/header__line.svg" />
     </header>
 
     <main class="content">
@@ -22,151 +21,105 @@
 
         <img
           class="profile__pic"
-          src="https://picsum.photos/120"
+          src="./images/profile__pic.jpg"
           alt="фото профиля"
         />
-        <div class="profile__info">
-          <h1 class="profile__title">Жак-Ив Кусто<button class="button__edit-info">
-            <img
-              class="button__edit-info_image"
-              src="./images/button__edit-info.svg"
-              alt=""
-            />
-          </button></h1>
-
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
           <h3 class="profile__subtitle">Исследователь океана</h3>
-
-      </div>
-        <button class="button__new-post">
-          <img
-            class="button__new-post_image"
-            src="./images/button__new-post.svg"
-          />
-        </button>
-
+          <button class="button button__edit-info"></button>
+        <button class="button button__new-post"></button>
       </section>
 
       <section class="cards">
-
         <div class="card">
           <img
             class="card__image"
-            src="https://picsum.photos/282"
+            src="./images/content/kirill-pershin-1088404-unsplash.jpg"
             alt="Иллюстрация"
           />
           <div class="card__caption">
             <h3 class="card__caption_text">Карачаевск</h3>
-            <button class="button__like">
-              <img
-                class="button__like_image"
-                src="./images/button__like.svg"
-                alt="кнопка лайк"
-              />
+            <button class="button button__like">
             </button>
           </div>
         </div>
-
         <div class="card">
           <img
             class="card__image"
-            src="https://picsum.photos/282"
+            src="./images/content/kirill-pershin-1404681-unsplash.jpg"
             alt="Иллюстрация"
           />
           <div class="card__caption">
-            <h3 class="card__caption_text">Карачаевск</h3>
-            <button class="button__like">
-              <img
-                class="button__like_image"
-                src="./images/button__like.svg"
-                alt="кнопка лайк"
-              />
+            <h3 class="card__caption_text">Гора Эльбрус</h3>
+            <button class="button button__like">
             </button>
           </div>
         </div>
-
         <div class="card">
           <img
             class="card__image"
-            src="https://picsum.photos/282"
+            src="./images/content/kirill-pershin-1556355-unsplash.jpg"
             alt="Иллюстрация"
           />
           <div class="card__caption">
-            <h3 class="card__caption_text">Карачаевск</h3>
-            <button class="button__like">
-              <img
-                class="button__like_image"
-                src="./images/button__like.svg"
-                alt="кнопка лайк"
-              />
+            <h3 class="card__caption_text">Домбай</h3>
+            <button class="button button__like">
             </button>
           </div>
         </div>
-
         <div class="card">
           <img
             class="card__image"
-            src="https://picsum.photos/282"
+            src="./images/content/kirill-pershin-1404681-unsplash.jpg"
             alt="Иллюстрация"
           />
           <div class="card__caption">
-            <h3 class="card__caption_text">Карачаевск</h3>
-            <button class="button__like">
-              <img
-                class="button__like_image"
-                src="./images/button__like.svg"
-                alt="кнопка лайк"
-              />
+            <h3 class="card__caption_text">Гора Эльбрус</h3>
+            <button class="button button__like">
             </button>
           </div>
         </div>
-
         <div class="card">
           <img
             class="card__image"
-            src="https://picsum.photos/282"
+            src="./images/content/kirill-pershin-1556355-unsplash.jpg"
             alt="Иллюстрация"
           />
           <div class="card__caption">
-            <h3 class="card__caption_text">Карачаевск</h3>
-            <button class="button__like">
-              <img
-                class="button__like_image"
-                src="./images/button__like.svg"
-                alt="кнопка лайк"
-              />
+            <h3 class="card__caption_text">Домбай</h3>
+            <button class="button button__like">
             </button>
           </div>
         </div>
-
         <div class="card">
           <img
             class="card__image"
-            src="https://picsum.photos/282"
+            src="./images/content/kirill-pershin-1088404-unsplash.jpg"
             alt="Иллюстрация"
           />
           <div class="card__caption">
-            <h3 class="card__caption_text">Карачаевск</h3>
-            <button class="button__like">
-              <img
-                class="button__like_image"
-                src="./images/button__like.svg"
-                alt="кнопка лайк"
-              />
+            <h3 class="card__caption_text">Карачаево-Черкесия</h3>
+            <button class="button button__like">
             </button>
           </div>
         </div>
-
       </section>
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
 
+    <section class="popup">
       <div class="popup__container">
         <button class="button button__popup_close"></button>
-        <h2 class="">Input</h2>
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <div class="input">
+          <input type="text" placeholder="Жак-Ив Кусто" class="input__name">
+          <input type="text" placeholder="Исследователь океана" class="input__caption">
+          <button class="button button__save">Сохранить</button>
+          </div>
+        </div>
 
       </div>
     </section>
