@@ -1,5 +1,5 @@
-.button__new-post {
-  background: url(../../../images/button__new-post.svg) center no-repeat;
+.profile__post-btn {
+  background: url(../../../images/profile__post-btn.svg) center no-repeat;
   box-sizing: border-box;
   height: 50px;
   width: 150px;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 930px) {
-  .button__new-post {
+  .profile__post-btn {
     width: 282px;
     grid-row: 6;
     grid-column: 1/4;

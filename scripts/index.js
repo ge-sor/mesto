@@ -1,7 +1,7 @@
-let openButton = document.querySelector('.button__edit-info');
+let openButton = document.querySelector('.profile__edit-btn');
 let popup = document.querySelector('.popup');
-let closeButton = document.querySelector('.button__popup_close');
-let saveButton = document.querySelector('.button__save');
+let closeButton = document.querySelector('.popup__close-btn');
+let saveButton = document.querySelector('.popup__save-btn');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 

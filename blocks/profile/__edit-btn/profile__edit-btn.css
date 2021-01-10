@@ -1,5 +1,5 @@
-.button__edit-info {
-  background: url(../../../images/button__edit-info.svg) center no-repeat;
+.profile__edit-btn {
+  background: url(../../../images/profile__edit-btn.svg) center no-repeat;
   height: 24px;
   width: 24px;
   border: 1px solid white;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 930px) {
-  .button__edit-info {
+  .profile__edit-btn {
     width: 18px;
     height: 18px;
     grid-row: 4;
