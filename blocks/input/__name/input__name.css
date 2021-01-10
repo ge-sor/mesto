@@ -17,7 +17,6 @@
 
 .input__name:focus {
   outline: none;
-  border-bottom: 1px solid rgba(100, 100, 100, .2);
 }
 
 @media screen and (max-width: 930px) {

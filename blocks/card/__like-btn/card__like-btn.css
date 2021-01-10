@@ -8,7 +8,4 @@
 .card__like-btn:active {
   opacity: 1;
   background: url(../../../images/card__like-btn_active.svg) center no-repeat;
-  background-size: 100%;
-  height: 19px;
-  width: 19px;
 }
