@@ -1,0 +1,9 @@
+.form__input_caption {
+  margin: 0 0 48px 0;
+}
+
+@media screen and (max-width: 930px) {
+  .form__input_caption {
+    margin-bottom: 45px;
+  }
+}

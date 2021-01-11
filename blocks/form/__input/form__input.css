@@ -1,4 +1,4 @@
-.input__name {
+.form__input {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -8,19 +8,18 @@
   border: none;
   border-bottom: 1px solid rgba(100, 100, 100, .2);
   padding: 0;
-  margin: 0 0 30px 0;
 }
 
-.input__name::placeholder {
+.form__input::placeholder {
   color: black;
 }
 
-.input__name:focus {
+.form__input:focus {
   outline: none;
 }
 
 @media screen and (max-width: 930px) {
-  .input__name {
+  .form__input {
     width: 238px;
   }
 }

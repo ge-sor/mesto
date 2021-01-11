@@ -105,16 +105,12 @@
     <section class="popup">
       <div class="popup__container">
         <button class="button popup__close-btn"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <div class="input">
-          <input type="text" placeholder="Жак-Ив Кусто" class="input__name" />
-          <input
-            type="text"
-            placeholder="Исследователь океана"
-            class="input__caption"
-          />
-          <button class="button popup__save-btn">Сохранить</button>
-        </div>
+        <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
+        <form class="form" id="form">
+          <input type="text" placeholder="Имя" class="form__input form__input_name" name="form" required/>
+          <input type="text" placeholder="Профессия" class="form__input form__input_caption" name="form" required/>
+          <button type="submit" class="button popup__save-btn">Сохранить</button>
+        </form>
       </div>
     </section>
     <script src="./scripts/index.js"></script>

@@ -6,6 +6,7 @@
   cursor: pointer;
   padding: 0;
   outline: none;
+  transition: opacity linear .2s;
 }
 
 .button:hover {
