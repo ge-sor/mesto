@@ -3,8 +3,8 @@ let popup = document.querySelector('.popup');
 let closeButton = document.querySelector('.popup__close-btn');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
-let newProfileTitle = document.querySelector('.form__input_name');
-let newProfileSubtitle = document.querySelector('.form__input_caption');
+let newProfileTitle = document.querySelector('.form__input_type_name');
+let newProfileSubtitle = document.querySelector('.form__input_type_caption');
 
 
 let openPopup = () => {
@@ -32,7 +32,7 @@ let formElement = document.querySelector('.form');
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
-     
+
     profileTitle.textContent = newProfileTitle.value;
     profileSubtitle.textContent = newProfileSubtitle.value;
     closePopup()
