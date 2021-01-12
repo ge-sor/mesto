@@ -3,60 +3,40 @@ let popup = document.querySelector('.popup');
 let closeButton = document.querySelector('.popup__close-btn');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
+let newProfileTitle = document.querySelector('.form__input_name');
+let newProfileSubtitle = document.querySelector('.form__input_caption');
 
 
-let togglePopup = () => {
-  popup.classList.toggle('popup_opened')
+let openPopup = () => {
+  popup.classList.add('popup_opened')
+  newProfileTitle.value = profileTitle.textContent;
+  newProfileSubtitle.value = profileSubtitle.textContent;
 }
 
-openButton.addEventListener('click', togglePopup)
+let closePopup = () => {
+  popup.classList.remove('popup_opened')
+}
 
-closeButton.addEventListener('click', togglePopup)
+openButton.addEventListener('click', openPopup)
+
+closeButton.addEventListener('click', closePopup)
 
 popup.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) {
-    togglePopup()
+    closePopup()
   }
 
 })
 
-togglePopup.addEventListener('click', function () {
-  let newProfileTitle = document.querySelector('.form__input_name');
-  let newProfileSubtitle = document.querySelector('.form__input_caption');
+let formElement = document.querySelector('.form');
 
-  newProfileTitle.value = profileTitle;
-  newProfileSubTitle.value = profileSubtitle;
-
-});
-
-// Находим форму в DOM
-let formElement = querySelector('.form');
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
 function handleFormSubmit (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                        // Так мы можем определить свою логику отправки.
-                        // О том, как это делать, расскажем позже.
-
-    // Находим поля формы в DOM
-    let newProfileTitle = document.querySelector('.form__input_name');
-    let newProfileSubtitle = document.querySelector('.form__input_caption');
-
-    // Получите значение полей из свойства value
-    newProfileTitle.value = profileTitle;
-    newProfileSubTitle.value = profileSubtitle;
-
-
-    // Выберите элементы, куда должны быть вставлены значения полей
-
-    // Вставьте новые значения с помощью textContent
+    evt.preventDefault();
+     
     profileTitle.textContent = newProfileTitle.value;
     profileSubtitle.textContent = newProfileSubtitle.value;
+    closePopup()
 }
 
-handleFormSubmit();
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
 
