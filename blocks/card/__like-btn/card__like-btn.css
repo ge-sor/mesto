@@ -4,7 +4,3 @@
   width: 22px;
 }
 
-.card__like-btn:active {
-  opacity: 1;
-  background: url(../../../images/card__like-btn_active.svg) center no-repeat;
-}
