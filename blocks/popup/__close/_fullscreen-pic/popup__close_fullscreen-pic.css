@@ -1,0 +1,12 @@
+.popup__close_fullscreen-pic {
+    top: 90px;
+    right: 60px;
+  }
+  
+  @media screen and (max-width: 930px) {
+    .popup__close_fullscreen-pic {
+      height: 26px;
+      top: -40px;
+      right: 0;
+    }
+  }
