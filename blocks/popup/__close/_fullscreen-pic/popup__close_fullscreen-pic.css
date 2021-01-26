@@ -1,4 +1,5 @@
 .popup__close_fullscreen-pic {
+    position: static;
     height: 40px;
     align-self: flex-end; 
     transform: translateX(45px);
