@@ -40,21 +40,21 @@
 
     <section class="popup popup_type_edit-profile">
       <div class="popup__container">
-        <button type="button" class="button popup__close-btn"></button>
+        <button type="button" class="button popup__close-btn popup__close-btn_profile"></button>
         <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
         <form class="form form_type_profile" id="form-profile" name="form-profile">
           <input
             type="text"
             placeholder="Имя"
             class="form__input form__input_type_name"
-            name="name"
+            name="profile-name"
             required
           />
           <input
             type="text"
             placeholder="О себе"
             class="form__input form__input_type_caption"
-            name="caption"
+            name="profile-caption"
             required
           />
           <button type="submit" class="button popup__save-btn">
@@ -73,14 +73,14 @@
             type="text"
             placeholder="Название"
             class="form__input form__input_type_place-name"
-            name="name"
+            name="card-name"
             required
           />
           <input
-            type="text"
+            type="url"
             placeholder="Ссылка на картинку"
-            class="form__input form__input_type_caption form__input_type_pic"
-            name="caption"
+            class="form__input form__input_type_pic"
+            name="card-link"
             required
           />
           <button type="submit" class="button popup__save-btn popup__save-btn_type_place-save">
@@ -93,14 +93,14 @@
     <section class="popup popup_type_fullscreen-pic">
       <div class="popup__container-pic">
         <button type="button" class="button popup__close-btn popup__close-btn_fullscreen-pic"></button>
-        <img class="popup__image-fullscreen" src="null" alt="Иллюстрация"/>
+        <img class="popup__image-fullscreen" src="#" alt="#"/>
         <h2 class="popup__text-fullscreen"></h2>
       </div>
     </section>
 
-    <template class="template__card">
+    <template class="template-card">
       <li class="card">
-       <img class="card__image" src="null" alt="Иллюстрация"/>
+       <img class="card__image" src="#" alt="#"/>
        <div class="card__caption">
          <h2 class="card__text"></h2>
          <button type="button" class="button card__like-btn"></button>
@@ -108,7 +108,8 @@
         <button type="button" class="button card__delete-btn"></button>
       </li>
     </template>
-
+    <script src="./scripts/initial-сards.js"></script>
     <script src="./scripts/index.js"></script>
+
   </body>
 </html>
