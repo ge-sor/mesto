@@ -1,7 +1,4 @@
 .popup__close-btn {
-  position: absolute;
-  top: -45px;
-  right: -45px;
   background: url(../../../images/popup__close-btn.svg) center no-repeat;
   background-size: contain;
   height: 56px;

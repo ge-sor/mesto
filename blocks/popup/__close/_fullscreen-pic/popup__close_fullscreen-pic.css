@@ -1,12 +1,11 @@
 .popup__close_fullscreen-pic {
-    top: 90px;
-    right: 60px;
+    height: 40px;
+    align-self: flex-end; 
+    transform: translateX(45px);
   }
   
   @media screen and (max-width: 930px) {
     .popup__close_fullscreen-pic {
-      height: 26px;
-      top: -40px;
-      right: 0;
+      transform: translate(22px, -10px);
     }
   }
