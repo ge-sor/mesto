@@ -1,4 +1,4 @@
-.popup__close_fullscreen-pic {
+.popup__close-btn_fullscreen-pic {
     position: static;
     height: 40px;
     align-self: flex-end;
@@ -6,7 +6,7 @@
   }
   
   @media screen and (max-width: 930px) {
-    .popup__close_fullscreen-pic {
+    .popup__close-btn_fullscreen-pic {
       transform: translate(22px, -10px);
     }
   }

@@ -81,8 +81,8 @@ closeButton.addEventListener('click', function() {
   togglePopup(profilePopup)
 });
 
-//закрытие попапа пкарточки по щелчку на крестик
-const closeNewPostButton = document.querySelector(".popup__close_new-card");
+//закрытие попапа карточки по щелчку на крестик
+const closeNewPostButton = document.querySelector(".popup__close-btn_new-card");
 closeNewPostButton.addEventListener('click', function() {
   togglePopup(cardPopup)
 });
@@ -118,8 +118,8 @@ function deleteCard(evt) {
 function openPicButton(evt) {
   closestImage = evt.target.closest('.card__image');
   togglePopup(openPicPopup);
-  document.querySelector('.card__image_full').src = closestImage.src;
-  document.querySelector('.card__text_full').textContent = closestImage.nextElementSibling.textContent;
+  document.querySelector('.popup__image-fullscreen').src = closestImage.src;
+  document.querySelector('.popup__text-fullscreen').textContent = closestImage.nextElementSibling.textContent;
 }
 
 //закрытие попапа карточки по щелчку на задний фон
@@ -130,7 +130,7 @@ openPicPopup.addEventListener('click', (event) => {
 })
 
 //закрытие попапа карточки по щелчку на крестик
-const closeCard = document.querySelector('.popup__close_fullscreen-pic');
+const closeCard = document.querySelector('.popup__close-btn_fullscreen-pic');
 closeCard.addEventListener('click', function() {
   togglePopup(openPicPopup)
 });
@@ -138,7 +138,7 @@ closeCard.addEventListener('click', function() {
 //создание новой карточки с помощью попапа
   const cardNameInput = document.querySelector(".form__input_type_place-name");
   const cardPicInput = document.querySelector(".form__input_type_pic");
-  const newPostSubmit = document.querySelector(".popup_type_place-save");
+  const newPostSubmit = document.querySelector(".popup__save-btn_type_place-save");
   const formNewPost = document.querySelector(".form_type_new-post");
 function handleCardSubmit (evt) {
   evt.preventDefault();
