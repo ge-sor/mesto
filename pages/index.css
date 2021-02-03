@@ -5,6 +5,7 @@
 @import url(../blocks/page/page.css);
 
 @import url(../blocks/button/button.css);
+@import url(../blocks/button/_inactive/button_inactive.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -42,4 +43,7 @@
 @import url(../blocks/popup/__close-btn/_fullscreen-pic/popup__close-btn_fullscreen-pic.css);
 
 @import url(../blocks/form/form.css);
+@import url(../blocks/form/__set/form__set.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type_error/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
