@@ -113,6 +113,12 @@ profilePopup.addEventListener('click', (event) => {
   }
 })
 
+profilePopup.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePopup(profilePopup)
+  }
+})
+
 //сохранение профиля и закрытие попапа
 formProfile.addEventListener('submit', handleProfileSubmit);
 

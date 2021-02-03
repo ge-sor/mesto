@@ -17,7 +17,7 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 /* Функция checkInputValidity принимает два параметра:
-formElement — html-элемент формы, в которой находится проверяемое поле ввода. 
+formElement — html-элемент формы, в которой находится проверяемое поле ввода.
 Он нужен для поиска элемента ошибки в форме.
 inputElement — проверяемое поле ввода. */
 const checkInputValidity = (formElement, inputElement) => {
@@ -53,9 +53,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
   buttonElement.classList.add('button_inactive');
+  buttonElement.setAttribute("disabled", "disabled");
 } else {
   // иначе сделай кнопку активной
   buttonElement.classList.remove('button_inactive');
+  buttonElement.removeAttribute("disabled", "disabled");
 }
 }
 
