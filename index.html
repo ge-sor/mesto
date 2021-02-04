@@ -29,8 +29,7 @@
       </section>
 
       <section class="cards">
-        <ul class="cards__list">
-        </ul>
+        <ul class="cards__list"></ul>
       </section>
     </main>
 
@@ -40,97 +39,121 @@
 
     <section id="popup-edit-profile" class="popup popup_type_edit-profile">
       <div class="popup__container">
-        <button type="button" class="button popup__close-btn popup__close-btn_profile"></button>
+        <button
+          type="button"
+          class="button popup__close-btn popup__close-btn_profile"
+        ></button>
         <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
-        <form novalidate class="form form_type_profile" id="form-profile" name="form-profile">
+        <form
+          novalidate
+          class="form form_type_profile"
+          id="form-profile"
+          name="form-profile"
+        >
           <fieldset class="form__set">
             <label class="form__field">
-            <input
-            id="profile-name-input"
-            type="text"
-            class="form__input form__input_type_name"
-            name="profile-name"
-            required
-            minlength="2"
-            maxlength="40"
-            placeholder="Имя"
-          />
-          <span class="profile-name-input-error form__input-error"></span>
-        </label>
-        <label class="form__field">
-          <input
-            id="profile-caption-input"
-            type="text"
-            class="form__input form__input_type_caption"
-            name="profile-caption"
-            required
-            minlength="2"
-            maxlength="200"
-            placeholder="О себе"
-          />
-          <span class="profile-caption-input-error form__input-error"></span>
-        </label>
-          <button type="submit" class="form__submit button popup__save-btn">
-            Сохранить
-          </button>
-        </fieldset>
+              <input
+                id="profile-name-input"
+                type="text"
+                class="form__input form__input_type_name"
+                name="profile-name"
+                required
+                minlength="2"
+                maxlength="40"
+                placeholder="Имя"
+              />
+              <span class="profile-name-input-error form__input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                id="profile-caption-input"
+                type="text"
+                class="form__input form__input_type_caption"
+                name="profile-caption"
+                required
+                minlength="2"
+                maxlength="200"
+                placeholder="О себе"
+              />
+              <span
+                class="profile-caption-input-error form__input-error"
+              ></span>
+            </label>
+            <button type="submit" class="form__submit button popup__save-btn">
+              Сохранить
+            </button>
+          </fieldset>
         </form>
       </div>
     </section>
 
     <section id="popup-new-post" class="popup popup_type_new-post">
       <div class="popup__container">
-        <button type="button" class="button popup__close-btn popup__close-btn_new-card"></button>
+        <button
+          type="button"
+          class="button popup__close-btn popup__close-btn_new-card"
+        ></button>
         <h2 class="popup__title">Новое&nbsp;место</h2>
 
-        <form novalidate class="form form_type_new-post" id="form-newpost" name="form-newpost">
+        <form
+          novalidate
+          class="form form_type_new-post"
+          id="form-newpost"
+          name="form-newpost"
+        >
           <fieldset class="form__set">
             <label class="form__field">
-          <input
-            id="card-name-input"
-            type="text"
-            class="form__input form__input_type_place-name"
-            name="card-name"
-            required
-            minlength="2"
-            maxlength="30"
-          >
-          <span class="form__placeholder card-name-placeholder">Название</span>
-          <span class="card-name-input-error form__input-error"></span>
-        </label>
-        <label class="form__field">
-          <input
-            id="url-input"
-            type="url"
-            class="form__input form__input_type_pic"
-            name="card-link"
-            required
-          >
-          <span class="form__placeholder url-input-placeholder">Ссылка на картинку</span>
-          <span class="url-input-error form__input-error"></span>
-        </label>
-          <button type="submit" class="form__submit button popup__save-btn popup__save-btn_type_place-save">
-            Сохранить
-          </button>
-        </fieldset>
+              <input
+                id="card-name-input"
+                type="text"
+                class="form__input form__input_type_place-name"
+                name="card-name"
+                required
+                minlength="2"
+                maxlength="30"
+                placeholder="Название"
+              />
+              <span class="card-name-input-error form__input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                id="url-input"
+                type="url"
+                class="form__input form__input_type_pic"
+                name="card-link"
+                required
+                placeholder="Ссылка на картинку"
+              />
+              <span class="url-input-error form__input-error"></span>
+            </label>
+            <button
+              type="submit"
+              class="form__submit button popup__save-btn popup__save-btn_type_place-save"
+            >
+              Сохранить
+            </button>
+          </fieldset>
         </form>
       </div>
     </section>
 
     <section id="popup-fullscreen-pic" class="popup popup_type_fullscreen-pic">
       <div class="popup__container-pic">
-        <button type="button" class="button popup__close-btn popup__close-btn_fullscreen-pic"></button>
-        <img class="popup__image-fullscreen" src="#" alt="#"/>
+        <button
+          type="button"
+          class="button popup__close-btn popup__close-btn_fullscreen-pic"
+        ></button>
+        <img class="popup__image-fullscreen" src="#" alt="#" />
         <h2 class="popup__text-fullscreen"></h2>
       </div>
     </section>
 
     <template class="template-card">
       <li class="card">
-       <img class="card__image" src="#" alt="#"/>
-       <div class="card__caption">
-         <h2 class="card__text"></h2>
-         <button type="button" class="button card__like-btn"></button>
+        <img class="card__image" src="#" alt="#" />
+        <div class="card__caption">
+          <h2 class="card__text"></h2>
+          <button type="button" class="button card__like-btn"></button>
         </div>
         <button type="button" class="button card__delete-btn"></button>
       </li>
@@ -138,6 +161,5 @@
     <script src="./scripts/validate.js"></script>
     <script src="./scripts/initial-сards.js"></script>
     <script src="./scripts/index.js"></script>
-
   </body>
 </html>

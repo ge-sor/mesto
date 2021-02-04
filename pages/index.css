@@ -42,7 +42,6 @@
 @import url(../blocks/popup/__close-btn/_fullscreen-pic/popup__close-btn_fullscreen-pic.css);
 
 @import url(../blocks/form/form.css);
-@import url(../blocks/form/__placeholder/form__placeholder.css);
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__set/form__set.css);
 @import url(../blocks/form/__input/form__input.css);

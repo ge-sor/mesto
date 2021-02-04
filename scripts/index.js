@@ -12,7 +12,7 @@ const closeNewPostButton = document.querySelector(".popup__close-btn_new-card");
 const cardContainer = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector(".template-card").content;
 const openPicPopup = document.querySelector('.popup_type_fullscreen-pic');
-const closeCard = document.querySelector('.popup__close-btn_fullscreen-pic');
+const closeCardButton = document.querySelector('.popup__close-btn_fullscreen-pic');
 const cardNameInput = document.querySelector(".form__input_type_place-name");
 const cardPicInput = document.querySelector(".form__input_type_pic");
 const formNewPost = document.querySelector(".form_type_new-post");
@@ -37,7 +37,6 @@ function handleProfileSubmit (evt) {
   profileSubtitle.textContent = newProfileSubtitle.value;
   closePopup(profilePopup)
 }
-
 
 //переключение класса кнопки лайк
 function likeCard(evt) {
@@ -106,21 +105,15 @@ newPostButton.addEventListener('click', function() {
 });
 
 
+//сохранение профиля и закрытие попапа
+formProfile.addEventListener('submit', handleProfileSubmit);
+
 //закрытие попапа профиля по щелчку на задний фон
 profilePopup.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) {
     closePopup(profilePopup)
   }
 })
-
-profilePopup.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(profilePopup)
-  }
-})
-
-//сохранение профиля и закрытие попапа
-formProfile.addEventListener('submit', handleProfileSubmit);
 
 //закрытие попапа создания карточки по щелчку на задний фон
 cardPopup.addEventListener('click', (event) => {
@@ -129,16 +122,6 @@ cardPopup.addEventListener('click', (event) => {
   }
 })
 
-//закрытие попапа профиля по щелчку на крестик
-closeProfileButton.addEventListener('click', function() {
-  closePopup(profilePopup)
-});
-
-//закрытие попапа карточки по щелчку на крестик
-closeNewPostButton.addEventListener('click', function() {
-  closePopup(cardPopup)
-});
-
 //закрытие попапа карточки по щелчку на задний фон
 openPicPopup.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) {
@@ -146,8 +129,39 @@ openPicPopup.addEventListener('click', (event) => {
   }
 })
 
+//закрытие попапа профиля по клавише esc
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePopup(profilePopup)
+  }
+})
+
+//закрытие попапа создания карточки по клавише esc
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePopup(cardPopup)
+  }
+})
+
+//закрытие попапа карточки по клавише esc
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePopup(openPicPopup)
+  }
+})
+
+//закрытие попапа профиля по щелчку на крестик
+closeProfileButton.addEventListener('click', function() {
+  closePopup(profilePopup)
+});
+
+//закрытие попапа создания карточки по щелчку на крестик
+closeNewPostButton.addEventListener('click', function() {
+  closePopup(cardPopup)
+});
+
 //закрытие попапа карточки по щелчку на крестик
-closeCard.addEventListener('click', function() {
+closeCardButton.addEventListener('click', function() {
   closePopup(openPicPopup)
 });
 
