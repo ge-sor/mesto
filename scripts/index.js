@@ -22,12 +22,32 @@ const fullscreenText = document.querySelector('.popup__text-fullscreen')
 
 //функция открытия попапа
 function openPopup(popupElement) {
-    popupElement.classList.add('popup_opened')
+    popupElement.classList.add('popup_opened');
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closePopup(popupElement)
+    };
+  });
+    popupElement.addEventListener('click', (event) => {
+      if (event.target === event.currentTarget) {
+        closePopup(popupElement)
+      }
+    });
   }
 
-//функция закрытия попапа
+  //функция закрытия попапа
 function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened')
+  popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closePopup(popupElement)
+  };
+});
+  popupElement.removeEventListener('click', (event) => {
+    if (event.target === event.currentTarget) {
+      closePopup(popupElement)
+    }
+  });
 }
 
 //сохранение изменений данных профиля и закрытие попапа профиля
@@ -87,6 +107,8 @@ function handleCardSubmit (evt) {
   cardContainer.prepend(createCard(cardInputs));
   closePopup(cardPopup);
   formNewPost.reset();
+  formNewPost.querySelector('.popup__save-btn_type_place-save').classList.add('button_inactive');
+  formNewPost.querySelector('.popup__save-btn_type_place-save').disabled = true;
 }
 
 //сохранение новой карточки и закрытие попапа
@@ -104,51 +126,8 @@ newPostButton.addEventListener('click', function() {
   openPopup(cardPopup)
 });
 
-
 //сохранение профиля и закрытие попапа
 formProfile.addEventListener('submit', handleProfileSubmit);
-
-//закрытие попапа профиля по щелчку на задний фон
-profilePopup.addEventListener('click', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(profilePopup)
-  }
-})
-
-//закрытие попапа создания карточки по щелчку на задний фон
-cardPopup.addEventListener('click', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(cardPopup)
-  }
-})
-
-//закрытие попапа карточки по щелчку на задний фон
-openPicPopup.addEventListener('click', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(openPicPopup)
-  }
-})
-
-//закрытие попапа профиля по клавише esc
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(profilePopup)
-  }
-})
-
-//закрытие попапа создания карточки по клавише esc
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(cardPopup)
-  }
-})
-
-//закрытие попапа карточки по клавише esc
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(openPicPopup)
-  }
-})
 
 //закрытие попапа профиля по щелчку на крестик
 closeProfileButton.addEventListener('click', function() {
@@ -164,11 +143,3 @@ closeNewPostButton.addEventListener('click', function() {
 closeCardButton.addEventListener('click', function() {
   closePopup(openPicPopup)
 });
-
-
-
-
-
-
-
-

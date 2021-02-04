@@ -41,7 +41,6 @@ const hasInvalidInput = (inputList) => {
     // hasInvalidInput вернёт true
   return !inputElement.validity.valid;
 })
-hasInvalidInput()
 }
 
 
@@ -53,11 +52,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
   buttonElement.classList.add('button_inactive');
-  buttonElement.setAttribute("disabled", "disabled");
+  buttonElement.disabled = true;
 } else {
   // иначе сделай кнопку активной
   buttonElement.classList.remove('button_inactive');
-  buttonElement.removeAttribute("disabled", "disabled");
+  buttonElement.disabled = false;
 }
 }
 
@@ -100,4 +99,4 @@ enableValidation({
   inactiveButtonClass: 'button_inactive',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
-}); 
+});
