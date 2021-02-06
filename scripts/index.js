@@ -22,32 +22,32 @@ const fullscreenText = document.querySelector('.popup__text-fullscreen')
 
 //функция открытия попапа
 function openPopup(popupElement) {
-    popupElement.classList.add('popup_opened');
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        closePopup(popupElement)
-    };
-  });
-    popupElement.addEventListener('click', (event) => {
-      if (event.target === event.currentTarget) {
-        closePopup(popupElement)
-      }
-    });
-  }
-
-  //функция закрытия попапа
-function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened');
-  document.removeEventListener('keydown', (event) => {
+  popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       closePopup(popupElement)
   };
 });
-  popupElement.removeEventListener('click', (event) => {
+  popupElement.addEventListener('click', (event) => {
     if (event.target === event.currentTarget) {
       closePopup(popupElement)
     }
   });
+}
+
+//функция закрытия попапа
+function closePopup(popupElement) {
+popupElement.classList.remove('popup_opened');
+document.removeEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePopup(popupElement)
+};
+});
+popupElement.removeEventListener('click', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(popupElement)
+  }
+});
 }
 
 //сохранение изменений данных профиля и закрытие попапа профиля
@@ -56,6 +56,8 @@ function handleProfileSubmit (evt) {
   profileTitle.textContent = newProfileTitle.value;
   profileSubtitle.textContent = newProfileSubtitle.value;
   closePopup(profilePopup)
+  formProfile.querySelector('.popup__save-btn_type_profile-save').classList.add('button_inactive');
+  formProfile.querySelector('.popup__save-btn_type_profile-save').disabled = true;
 }
 
 //переключение класса кнопки лайк
@@ -126,8 +128,10 @@ newPostButton.addEventListener('click', function() {
   openPopup(cardPopup)
 });
 
+
 //сохранение профиля и закрытие попапа
 formProfile.addEventListener('submit', handleProfileSubmit);
+
 
 //закрытие попапа профиля по щелчку на крестик
 closeProfileButton.addEventListener('click', function() {
@@ -143,3 +147,11 @@ closeNewPostButton.addEventListener('click', function() {
 closeCardButton.addEventListener('click', function() {
   closePopup(openPicPopup)
 });
+
+
+
+
+
+
+
+
