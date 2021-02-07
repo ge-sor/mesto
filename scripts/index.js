@@ -22,32 +22,24 @@ const fullscreenText = document.querySelector('.popup__text-fullscreen')
 
 //функция открытия попапа
 function openPopup(popupElement) {
+  document.addEventListener('keydown', handleClosePopup)
+  popupElement.addEventListener('click', handleClosePopup)
   popupElement.classList.add('popup_opened');
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closePopup(popupElement)
-  };
-});
-  popupElement.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) {
-      closePopup(popupElement)
-    }
-  });
 }
 
 //функция закрытия попапа
 function closePopup(popupElement) {
-popupElement.classList.remove('popup_opened');
-document.removeEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(popupElement)
-};
-});
-popupElement.removeEventListener('click', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(popupElement)
+  popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleClosePopup)
+  popupElement.removeEventListener('click', handleClosePopup)
+}
+
+
+const handleClosePopup = (evt) => {
+  const popupActive = document.querySelector('.popup_opened')
+  if (evt.key === 'Escape' || evt.target === evt.currentTarget) {
+    closePopup(popupActive)
   }
-});
 }
 
 //сохранение изменений данных профиля и закрытие попапа профиля
@@ -56,8 +48,6 @@ function handleProfileSubmit (evt) {
   profileTitle.textContent = newProfileTitle.value;
   profileSubtitle.textContent = newProfileSubtitle.value;
   closePopup(profilePopup)
-  formProfile.querySelector('.popup__save-btn_type_profile-save').classList.add('button_inactive');
-  formProfile.querySelector('.popup__save-btn_type_profile-save').disabled = true;
 }
 
 //переключение класса кнопки лайк
@@ -102,6 +92,7 @@ render();
 //создание новой карточки с помощью попапа
 function handleCardSubmit (evt) {
   evt.preventDefault();
+  const newPostSaveButton = formNewPost.querySelector('.popup__save-btn_type_place-save');
   const cardInputs = {
     link: cardPicInput.value,
     name: cardNameInput.value,
@@ -109,8 +100,8 @@ function handleCardSubmit (evt) {
   cardContainer.prepend(createCard(cardInputs));
   closePopup(cardPopup);
   formNewPost.reset();
-  formNewPost.querySelector('.popup__save-btn_type_place-save').classList.add('button_inactive');
-  formNewPost.querySelector('.popup__save-btn_type_place-save').disabled = true;
+  newPostSaveButton.classList.add('button_inactive');
+  newPostSaveButton.disabled = true;
 }
 
 //сохранение новой карточки и закрытие попапа
@@ -121,6 +112,11 @@ editButton.addEventListener('click', function() {
   openPopup(profilePopup);
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
+  const profileSaveButton = formProfile.querySelector('.popup__save-btn_type_profile-save')
+  //конпку сохранить я сделал активной, но с другой стороны мне кажется не стоит пользователю
+  //давать возможность отправлять еще раз не измененные данные. Надеюсь не сочтете за ошибку.
+  profileSaveButton.classList.remove('button_inactive');
+  profileSaveButton.disabled = false;
 });
 
 //открытие формы создания карточки
