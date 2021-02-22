@@ -113,8 +113,6 @@ editButton.addEventListener('click', function() {
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
   const profileSaveButton = formProfile.querySelector('.popup__save-btn_type_profile-save')
-  //конпку сохранить я сделал активной, но с другой стороны мне кажется не стоит пользователю
-  //давать возможность отправлять еще раз не измененные данные. Надеюсь не сочтете за ошибку.
   profileSaveButton.classList.remove('button_inactive');
   profileSaveButton.disabled = false;
 });
