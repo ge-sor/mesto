@@ -18,6 +18,7 @@ const cardPicInput = document.querySelector(".form__input_type_pic");
 const formNewPost = document.querySelector(".form_type_new-post");
 const fullscreenImage = document.querySelector('.popup__image-fullscreen');
 const fullscreenText = document.querySelector('.popup__text-fullscreen')
+const popupElement = document.querySelector('.popup');
 
 
 //функция открытия попапа
@@ -113,8 +114,6 @@ editButton.addEventListener('click', function() {
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
   const profileSaveButton = formProfile.querySelector('.popup__save-btn_type_profile-save')
-  //конпку сохранить я сделал активной, но с другой стороны мне кажется не стоит пользователю
-  //давать возможность отправлять еще раз не измененные данные. Надеюсь не сочтете за ошибку.
   profileSaveButton.classList.remove('button_inactive');
   profileSaveButton.disabled = false;
 });
@@ -140,12 +139,67 @@ closeNewPostButton.addEventListener('click', function() {
 });
 
 //закрытие попапа карточки по щелчку на крестик
-closeCardButton.addEventListener('click', function() {
+/* closeCardButton.addEventListener('click', function() {
   closePopup(openPicPopup)
 });
+ */
 
 
+/*
+class Card {
+  constructor(data, cardSelector) {
+    this._title = data.title;
 
+    this._image = data.image;
+    this._cardSelector = cardSelector;
+  }
+
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
+
+    return cardElement;
+  }
+
+  generateCard() {
+  this._element = this._getTemplate();
+  this._setEventListeners();
+
+  this._element.querySelector('.card__image').style.backgroundImage = `url(${this._image})`;
+  this._element.querySelector('.card__text').textContent = this._title;
+
+  return this._element;
+}
+  _handleOpenPopup() {
+    popupImage.src = this._image;
+    popupElement.classList.add('popup_opened')
+  }
+  _handleClosePopup() {
+    popupImage.src = '';
+    popupElement.classList.remove('popup_opened')
+  }
+  _setEventListeners() {
+  this._element.addEventListener('click', () => {
+    this._handleOpenPopup()
+  });
+
+  closeCardButton.addEventListener('click', () => {
+    this._handleClosePopup()
+  });
+}
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item, '.card');
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  document.querySelector('.cards').append(cardElement);
+});
+*/
 
 
 
