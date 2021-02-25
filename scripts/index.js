@@ -1,4 +1,4 @@
-import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle, 
+import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   editButton, newPostButton, profilePopup, cardPopup, formProfile,
   closeProfileButton, closeNewPostButton, cardContainer,
   cardTemplate, openPicPopup, closeCardButton, cardNameInput,
@@ -86,26 +86,9 @@ function handleCardPopup(evt) {
   fullscreenText.textContent = closestCard.querySelector('.card__text').textContent;
 }
 
-//создание карточек из массива с помощью template
-function createCard(item) {
-  const card = cardTemplate.cloneNode(true);
-  const cardImage = card.querySelector('.card__image')
-  card.querySelector('.card__text').textContent = item.name;
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  card.querySelector('.card__like-btn').addEventListener('click', likeCard);
-  cardImage.addEventListener('click', handleCardPopup);
-  card.querySelector('.card__delete-btn').addEventListener('click', deleteCard);
-  return card;
-};
 
-//рендер карточек из массива
-function render() {
-  initialCards.forEach((item) => {
-    cardContainer.append(createCard(item))
-  });
-};
-render();
+
+
 
 //создание новой карточки с помощью попапа
 function handleCardSubmit (evt) {
@@ -115,7 +98,12 @@ function handleCardSubmit (evt) {
     link: cardPicInput.value,
     name: cardNameInput.value,
   }
-  cardContainer.prepend(createCard(cardInputs));
+
+  const card = new Card(cardInputs, '.template-card');
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  cardContainer.prepend(cardElement);
   closePopup(cardPopup);
   formNewPost.reset();
   newPostSaveButton.classList.add('button_inactive');
@@ -125,27 +113,20 @@ function handleCardSubmit (evt) {
 //сохранение новой карточки и закрытие попапа
 formNewPost.addEventListener('submit', handleCardSubmit)
 
-//закрытие попапа карточки по щелчку на крестик
-/* closeCardButton.addEventListener('click', function() {
-  closePopup(openPicPopup)
-});
- */
 
-
-/*
 class Card {
   constructor(data, cardSelector) {
-    this._title = data.title;
-    this._image = data.image;
+    this._title = data.name;
+    this._image = data.link;
     this._cardSelector = cardSelector;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.card')
-      .cloneNode(true);
+    .querySelector(this._cardSelector)
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
 
     return cardElement;
   }
@@ -154,11 +135,19 @@ class Card {
   this._element = this._getTemplate();
   this._setEventListeners();
 
-  this._element.querySelector('.card__image').style.backgroundImage = `url(${this._image})`;
+  const cardImage = this._element.querySelector('.card__image')
+  cardImage.src = this._image;
+  cardImage.alt = this._title;
   this._element.querySelector('.card__text').textContent = this._title;
+
+  cardImage.addEventListener('click', handleCardPopup);
+  this._element.querySelector('.card__like-btn').addEventListener('click', likeCard);
+  this._element.querySelector('.card__delete-btn').addEventListener('click', deleteCard);
 
   return this._element;
 }
+
+
   _handleOpenPopup() {
     popupImage.src = this._image;
     popupElement.classList.add('popup_opened')
@@ -171,21 +160,21 @@ class Card {
   this._element.addEventListener('click', () => {
     this._handleOpenPopup()
   });
-
+//закрытие попапа карточки по щелчку на крестик
   closeCardButton.addEventListener('click', () => {
     this._handleClosePopup()
   });
 }
 }
-
+//рендер карточек из массива
 initialCards.forEach((item) => {
-  const card = new Card(item, '.card');
+  const card = new Card(item, '.template-card');
   const cardElement = card.generateCard();
 
   // Добавляем в DOM
-  document.querySelector('.cards').append(cardElement);
+  cardContainer.append(cardElement);
 });
-*/
+
 
 
 
