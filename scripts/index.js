@@ -1,43 +1,30 @@
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-const newProfileTitle = document.querySelector('.form__input_type_name');
-const newProfileSubtitle = document.querySelector('.form__input_type_caption');
-const editButton = document.querySelector('.profile__edit-btn');
-const newPostButton = document.querySelector(".profile__post-btn");
-const profilePopup = document.querySelector('.popup_type_edit-profile');
-const cardPopup = document.querySelector('.popup_type_new-post');
-const formProfile = document.querySelector('.form_type_profile');
-const closeProfileButton = document.querySelector('.popup__close-btn_profile');
-const closeNewPostButton = document.querySelector(".popup__close-btn_new-card");
-const cardContainer = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector(".template-card").content;
-const openPicPopup = document.querySelector('.popup_type_fullscreen-pic');
-const closeCardButton = document.querySelector('.popup__close-btn_fullscreen-pic');
-const cardNameInput = document.querySelector(".form__input_type_place-name");
-const cardPicInput = document.querySelector(".form__input_type_pic");
-const formNewPost = document.querySelector(".form_type_new-post");
-const fullscreenImage = document.querySelector('.popup__image-fullscreen');
-const fullscreenText = document.querySelector('.popup__text-fullscreen')
-const popupElement = document.querySelector('.popup');
+import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle, 
+  editButton, newPostButton, profilePopup, cardPopup, formProfile,
+  closeProfileButton, closeNewPostButton, cardContainer,
+  cardTemplate, openPicPopup, closeCardButton, cardNameInput,
+  cardPicInput, formNewPost, fullscreenImage, fullscreenText, popupElement
+} from './constants.js';
+import {initialCards} from './initial-сards.js';
 
 
-//функция открытия попапа
+
+//функция открытия попапов
 function openPopup(popupElement) {
   document.addEventListener('keydown', handleClosePopup)
   popupElement.addEventListener('click', handleClosePopup)
   popupElement.classList.add('popup_opened');
 }
 
-//функция закрытия попапа
+//функция закрытия попапов
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleClosePopup)
   popupElement.removeEventListener('click', handleClosePopup)
 }
 
-
+//закрытие любого попапа кликом на оверлей
 const handleClosePopup = (evt) => {
-  const popupActive = document.querySelector('.popup_opened')
+  const popupActive = document.querySelector('.popup_opened');
   if (evt.key === 'Escape' || evt.target === evt.currentTarget) {
     closePopup(popupActive)
   }
@@ -50,6 +37,36 @@ function handleProfileSubmit (evt) {
   profileSubtitle.textContent = newProfileSubtitle.value;
   closePopup(profilePopup)
 }
+
+//открытие формы изменения профиля, подстановка значений в инпуты
+editButton.addEventListener('click', function() {
+  openPopup(profilePopup);
+  newProfileTitle.value = profileTitle.textContent;
+  newProfileSubtitle.value = profileSubtitle.textContent;
+  const profileSaveButton = formProfile.querySelector('.popup__save-btn_type_profile-save')
+  profileSaveButton.classList.remove('button_inactive');
+  profileSaveButton.disabled = false;
+});
+
+
+//сохранение профиля и закрытие попапа
+formProfile.addEventListener('submit', handleProfileSubmit);
+
+
+//закрытие попапа профиля по щелчку на крестик
+closeProfileButton.addEventListener('click', function() {
+  closePopup(profilePopup)
+});
+
+//закрытие попапа создания карточки по щелчку на крестик
+closeNewPostButton.addEventListener('click', function() {
+  closePopup(cardPopup)
+});
+
+//открытие формы создания карточки
+newPostButton.addEventListener('click', function() {
+  openPopup(cardPopup)
+});
 
 //переключение класса кнопки лайк
 function likeCard(evt) {
@@ -108,36 +125,6 @@ function handleCardSubmit (evt) {
 //сохранение новой карточки и закрытие попапа
 formNewPost.addEventListener('submit', handleCardSubmit)
 
-//открытие формы изменения профиля, подстановка значений в инпуты
-editButton.addEventListener('click', function() {
-  openPopup(profilePopup);
-  newProfileTitle.value = profileTitle.textContent;
-  newProfileSubtitle.value = profileSubtitle.textContent;
-  const profileSaveButton = formProfile.querySelector('.popup__save-btn_type_profile-save')
-  profileSaveButton.classList.remove('button_inactive');
-  profileSaveButton.disabled = false;
-});
-
-//открытие формы создания карточки
-newPostButton.addEventListener('click', function() {
-  openPopup(cardPopup)
-});
-
-
-//сохранение профиля и закрытие попапа
-formProfile.addEventListener('submit', handleProfileSubmit);
-
-
-//закрытие попапа профиля по щелчку на крестик
-closeProfileButton.addEventListener('click', function() {
-  closePopup(profilePopup)
-});
-
-//закрытие попапа создания карточки по щелчку на крестик
-closeNewPostButton.addEventListener('click', function() {
-  closePopup(cardPopup)
-});
-
 //закрытие попапа карточки по щелчку на крестик
 /* closeCardButton.addEventListener('click', function() {
   closePopup(openPicPopup)
@@ -149,7 +136,6 @@ closeNewPostButton.addEventListener('click', function() {
 class Card {
   constructor(data, cardSelector) {
     this._title = data.title;
-
     this._image = data.image;
     this._cardSelector = cardSelector;
   }
