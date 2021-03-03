@@ -10,7 +10,6 @@ const formProfile = document.querySelector('.form_type_profile');
 const closeProfileButton = document.querySelector('.popup__close-btn_profile');
 const closeNewPostButton = document.querySelector(".popup__close-btn_new-card");
 const cardContainer = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector(".template-card").content;
 const openPicPopup = document.querySelector('.popup_type_fullscreen-pic');
 const closeCardButton = document.querySelector('.popup__close-btn_fullscreen-pic');
 const cardNameInput = document.querySelector(".form__input_type_place-name");
@@ -20,9 +19,9 @@ const fullscreenImage = document.querySelector('.popup__image-fullscreen');
 const fullscreenText = document.querySelector('.popup__text-fullscreen');
 const popupElement = document.querySelector('.popup');
 
-export {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle, 
+export {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
     editButton, newPostButton, profilePopup, cardPopup, formProfile,
     closeProfileButton, closeNewPostButton, cardContainer,
-    cardTemplate, openPicPopup, closeCardButton, cardNameInput,
+    openPicPopup, closeCardButton, cardNameInput,
     cardPicInput, formNewPost, fullscreenImage, fullscreenText, popupElement
 }

@@ -1,4 +1,5 @@
 import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   editButton, newPostButton, profilePopup, cardPopup, formProfile,
   closeProfileButton, closeNewPostButton, cardContainer,
@@ -12,7 +13,7 @@ import {initialCards} from './initial-сards.js';
   initialCards.forEach((item) => {
     const card = new Card(item, '.template-card');
     const cardElement = card.generateCard();
-  
+
     // Добавляем в DOM
     cardContainer.append(cardElement);
   });
@@ -53,9 +54,6 @@ editButton.addEventListener('click', function() {
   openPopup(profilePopup);
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
-  const profileSaveButton = formProfile.querySelector('.popup__save-btn_type_profile-save')
-  profileSaveButton.classList.remove('button_inactive');
-  profileSaveButton.disabled = false;
 });
 
 
