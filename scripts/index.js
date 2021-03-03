@@ -1,11 +1,21 @@
+import {Card} from './Card.js';
 import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   editButton, newPostButton, profilePopup, cardPopup, formProfile,
   closeProfileButton, closeNewPostButton, cardContainer,
-  cardTemplate, openPicPopup, closeCardButton, cardNameInput,
-  cardPicInput, formNewPost, fullscreenImage, fullscreenText, popupElement
+  cardNameInput,
+  cardPicInput, formNewPost
 } from './constants.js';
 import {initialCards} from './initial-сards.js';
 
+
+  //рендер карточек из массива
+  initialCards.forEach((item) => {
+    const card = new Card(item, '.template-card');
+    const cardElement = card.generateCard();
+  
+    // Добавляем в DOM
+    cardContainer.append(cardElement);
+  });
 
 
 //функция открытия попапов
@@ -68,27 +78,6 @@ newPostButton.addEventListener('click', function() {
   openPopup(cardPopup)
 });
 
-//переключение класса кнопки лайк
-function likeCard(evt) {
-	evt.target.classList.toggle('card__like-btn_active');}
-
-//удаление карточки
-function deleteCard(evt) {
-	evt.target.closest('.card').remove();}
-
-//попап карточки
-function handleCardPopup(evt) {
-  closestImage = evt.target.closest('.card__image');
-  closestCard = evt.target.closest('.card');
-  openPopup(openPicPopup);
-  fullscreenImage.src = closestImage.src;
-  fullscreenImage.alt = closestCard.querySelector('.card__text').textContent;
-  fullscreenText.textContent = closestCard.querySelector('.card__text').textContent;
-}
-
-
-
-
 
 //создание новой карточки с помощью попапа
 function handleCardSubmit (evt) {
@@ -112,68 +101,6 @@ function handleCardSubmit (evt) {
 
 //сохранение новой карточки и закрытие попапа
 formNewPost.addEventListener('submit', handleCardSubmit)
-
-
-class Card {
-  constructor(data, cardSelector) {
-    this._title = data.name;
-    this._image = data.link;
-    this._cardSelector = cardSelector;
-  }
-
-  _getTemplate() {
-    const cardElement = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
-
-    return cardElement;
-  }
-
-  generateCard() {
-  this._element = this._getTemplate();
-  this._setEventListeners();
-
-  const cardImage = this._element.querySelector('.card__image')
-  cardImage.src = this._image;
-  cardImage.alt = this._title;
-  this._element.querySelector('.card__text').textContent = this._title;
-
-  cardImage.addEventListener('click', handleCardPopup);
-  this._element.querySelector('.card__like-btn').addEventListener('click', likeCard);
-  this._element.querySelector('.card__delete-btn').addEventListener('click', deleteCard);
-
-  return this._element;
-}
-
-
-  _handleOpenPopup() {
-    popupImage.src = this._image;
-    popupElement.classList.add('popup_opened')
-  }
-  _handleClosePopup() {
-    popupImage.src = '';
-    popupElement.classList.remove('popup_opened')
-  }
-  _setEventListeners() {
-  this._element.addEventListener('click', () => {
-    this._handleOpenPopup()
-  });
-//закрытие попапа карточки по щелчку на крестик
-  closeCardButton.addEventListener('click', () => {
-    this._handleClosePopup()
-  });
-}
-}
-//рендер карточек из массива
-initialCards.forEach((item) => {
-  const card = new Card(item, '.template-card');
-  const cardElement = card.generateCard();
-
-  // Добавляем в DOM
-  cardContainer.append(cardElement);
-});
 
 
 
