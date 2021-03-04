@@ -4,7 +4,7 @@ import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   editButton, newPostButton, profilePopup, cardPopup, formProfile,
   closeProfileButton, closeNewPostButton, cardContainer,
   cardNameInput,
-  cardPicInput, formNewPost
+  cardPicInput, formNewPost, selectors
 } from './constants.js';
 import {initialCards} from './initial-сards.js';
 
@@ -49,12 +49,7 @@ function handleProfileSubmit (evt) {
   closePopup(profilePopup)
 }
 
-//открытие формы изменения профиля, подстановка значений в инпуты
-editButton.addEventListener('click', function() {
-  openPopup(profilePopup);
-  newProfileTitle.value = profileTitle.textContent;
-  newProfileSubtitle.value = profileSubtitle.textContent;
-});
+
 
 
 //сохранение профиля и закрытие попапа
@@ -71,10 +66,7 @@ closeNewPostButton.addEventListener('click', function() {
   closePopup(cardPopup)
 });
 
-//открытие формы создания карточки
-newPostButton.addEventListener('click', function() {
-  openPopup(cardPopup)
-});
+
 
 
 //создание новой карточки с помощью попапа
@@ -102,6 +94,25 @@ formNewPost.addEventListener('submit', handleCardSubmit)
 
 
 
+const validationEditProfile = new FormValidator(selectors, formProfile);
+validationEditProfile.enableValidation();
+
+const validationNewPlace = new FormValidator(selectors, formNewPost);
+validationNewPlace.enableValidation();
 
 
+//открытие формы изменения профиля, подстановка значений в инпуты
+editButton.addEventListener('click', function() {
+  openPopup(profilePopup);
+  newProfileTitle.value = profileTitle.textContent;
+  newProfileSubtitle.value = profileSubtitle.textContent;
+  validationEditProfile.hideInputError(formProfile, newProfileTitle);
+  validationEditProfile.hideInputError(formProfile, newProfileSubtitle);
+});
 
+//открытие формы создания карточки
+newPostButton.addEventListener('click', function() {
+  openPopup(cardPopup)
+  validationNewPlace.hideInputError(formNewPost, cardNameInput);
+  validationNewPlace.hideInputError(formNewPost, cardPicInput);
+});

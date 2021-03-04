@@ -18,10 +18,18 @@ const formNewPost = document.querySelector(".form_type_new-post");
 const fullscreenImage = document.querySelector('.popup__image-fullscreen');
 const fullscreenText = document.querySelector('.popup__text-fullscreen');
 const popupElement = document.querySelector('.popup');
+const selectors = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__submit',
+    inactiveButtonClass: 'button_inactive',
+    inputErrorClass: 'form__input_type_error',
+    formSetSelector: '.form__set'
+  }
 
 export {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
     editButton, newPostButton, profilePopup, cardPopup, formProfile,
     closeProfileButton, closeNewPostButton, cardContainer,
     openPicPopup, closeCardButton, cardNameInput,
-    cardPicInput, formNewPost, fullscreenImage, fullscreenText, popupElement
+    cardPicInput, formNewPost, fullscreenImage, fullscreenText, popupElement, selectors
 }
