@@ -103,15 +103,16 @@ validationNewPlace.enableValidation();
 
 //открытие формы изменения профиля, подстановка значений в инпуты
 editButton.addEventListener('click', function() {
-  openPopup(profilePopup);
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
+  openPopup(profilePopup);
   validationEditProfile.hideInputError(formProfile, newProfileTitle);
   validationEditProfile.hideInputError(formProfile, newProfileSubtitle);
 });
 
 //открытие формы создания карточки
 newPostButton.addEventListener('click', function() {
+  formNewPost.reset();
   openPopup(cardPopup)
   validationNewPlace.hideInputError(formNewPost, cardNameInput);
   validationNewPlace.hideInputError(formNewPost, cardPicInput);
