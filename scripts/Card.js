@@ -1,5 +1,6 @@
 
 import {openPicPopup, closeCardButton, fullscreenImage, fullscreenText} from './constants.js';
+import {openPopup, closePopup} from './index.js';
 export class Card {
     constructor(data, cardSelector) {
       this._title = data.name;
@@ -26,10 +27,6 @@ export class Card {
     cardImage.alt = this._title;
     this._element.querySelector('.card__text').textContent = this._title;
 
-
-    this._element.querySelector('.card__like-btn').addEventListener('click', this._likeCard);
-    this._element.querySelector('.card__delete-btn').addEventListener('click', this._deleteCard);
-
     return this._element;
   }
 
@@ -46,18 +43,17 @@ export class Card {
       fullscreenImage.src = this._image;
       fullscreenImage.alt = this._title;
       fullscreenText.textContent = this._title;
-      openPicPopup.classList.add('popup_opened')
-      document.addEventListener('keydown', this._handleClosePopup)
-      openPicPopup.addEventListener('click', this._handleClosePopup)
-      closeCardButton.addEventListener('click', this._handleClosePopup)
+      openPopup(openPicPopup);
     }
     _handleClosePopup = (evt) => {
         if (evt.key === 'Escape' || evt.target === closeCardButton || evt.target === evt.currentTarget) {
-      openPicPopup.classList.remove('popup_opened')
+      closePopup(openPicPopup);
     }
     }
 
     _setEventListeners() {
+      this._element.querySelector('.card__like-btn').addEventListener('click', this._likeCard);
+      this._element.querySelector('.card__delete-btn').addEventListener('click', this._deleteCard);
       this._element.querySelector('.card__image').addEventListener('click', () => {
       this._handleOpenPopup()
     });

@@ -90,19 +90,20 @@ _setEventListeners = (formElement) => {
 };
 
  enableValidation = () => {
-
-  const formList = Array.from(document.querySelectorAll(this._formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-
-    const fieldsetList = Array.from(formElement.querySelectorAll(this._formSetSelector));
-
-    fieldsetList.forEach((fieldset) => {
-      this._setEventListeners(fieldset);
-    });
+  this._formObject.addEventListener('submit', function(evt) {
+    evt.preventDefault();
   });
+
+
+  const fieldsetList = Array.from(this._formObject.querySelectorAll(this._formSetSelector));
+
+  fieldsetList.forEach((fieldset) => {
+    this._setEventListeners(fieldset);
+  });
+
+  }
+
+
 };
 
-}
+

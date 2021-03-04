@@ -1,12 +1,12 @@
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+
 import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   editButton, newPostButton, profilePopup, cardPopup, formProfile,
   closeProfileButton, closeNewPostButton, cardContainer,
   cardNameInput,
-  cardPicInput, formNewPost, selectors
+  cardPicInput, formNewPost, selectors, initialCards
 } from './constants.js';
-import {initialCards} from './initial-сards.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 
   //рендер карточек из массива
@@ -20,14 +20,14 @@ import {initialCards} from './initial-сards.js';
 
 
 //функция открытия попапов
-function openPopup(popupElement) {
+export function openPopup(popupElement) {
   document.addEventListener('keydown', handleClosePopup)
   popupElement.addEventListener('click', handleClosePopup)
   popupElement.classList.add('popup_opened');
 }
 
 //функция закрытия попапов
-function closePopup(popupElement) {
+export function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleClosePopup)
   popupElement.removeEventListener('click', handleClosePopup)
