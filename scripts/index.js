@@ -12,7 +12,7 @@ import {FormValidator} from './FormValidator.js';
 function createCard(item) {
   const card = new Card(item, '.template-card');
   return card.generateCard();
-} 
+}
 
   //рендер карточек из массива
   initialCards.forEach((item) => {

@@ -13,14 +13,38 @@ export class FormValidator {
 };
 
 resetValidation() {
-  this._inputList.forEach(this.hideInputError());
-  this._toggleButtonState();
-}
+  this._inputList.forEach(this.hideInputError);
+  this._toggleButtonState;
+};
 
 disableSubmitButton (submitButton) {
   submitButton.classList.add(this._inactiveButtonClass);
   submitButton.disabled = true;
 };
+
+// Функция, которая скрывает ошибку
+hideInputError = (formElement, inputElement) => {
+  // Находим элемент ошибки
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove(this._inputErrorClass);
+  errorElement.textContent = '';
+};
+
+// Функция принимает массив полей ввода
+// и элемент кнопки, состояние которой нужно менять
+_toggleButtonState = (inputList, buttonElement) => {
+  // Если есть хотя бы один невалидный инпут
+  if (this._hasInvalidInput(inputList)) {
+    // сделай кнопку неактивной
+  buttonElement.classList.add(this._inactiveButtonClass);
+  buttonElement.disabled = true;
+} else {
+  // иначе сделай кнопку активной
+  buttonElement.classList.remove(this._inactiveButtonClass);
+  buttonElement.disabled = false;
+}
+}
+
 
 // Функция, которая показывает ошибку
 _showInputError = (formElement, inputElement, errorMessage) => {
@@ -31,13 +55,6 @@ _showInputError = (formElement, inputElement, errorMessage) => {
 
 };
 
-// Функция, которая скрывает ошибку
-hideInputError = (formElement, inputElement) => {
-  // Находим элемент ошибки
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(this._inputErrorClass);
-  errorElement.textContent = '';
-};
 
 /* Функция checkInputValidity принимает два параметра:
 formElement — html-элемент формы, в которой находится проверяемое поле ввода.
@@ -66,23 +83,6 @@ _hasInvalidInput = (inputList) => {
 })
 }
 
-
-
-// Функция принимает массив полей ввода
-// и элемент кнопки, состояние которой нужно менять
-_toggleButtonState = (inputList, buttonElement) => {
-  // Если есть хотя бы один невалидный инпут
-  if (this._hasInvalidInput(inputList)) {
-    // сделай кнопку неактивной
-  buttonElement.classList.add(this._inactiveButtonClass);
-  buttonElement.disabled = true;
-} else {
-  // иначе сделай кнопку активной
-  buttonElement.classList.remove(this._inactiveButtonClass);
-  buttonElement.disabled = false;
-}
-}
-
 _setEventListeners = (formElement) => {
   // Найдём все поля формы и сделаем из них массив
   const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
@@ -105,13 +105,11 @@ _setEventListeners = (formElement) => {
     evt.preventDefault();
   });
 
-
   const fieldsetList = Array.from(this._formObject.querySelectorAll(this._formSetSelector));
 
   fieldsetList.forEach((fieldset) => {
     this._setEventListeners(fieldset);
   });
-
   }
 
 
