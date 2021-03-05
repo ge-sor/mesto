@@ -8,8 +8,19 @@ export class FormValidator {
     this._inputErrorClass = selectors.inputErrorClass;
     this._formSetSelector = selectors.formSetSelector;
     this._formObject = formObject;
+    this._inputList = Array.from(this._formObject.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formObject.querySelector(this._submitButtonSelector);
+};
+
+resetValidation() {
+  this._inputList.forEach(this.hideInputError());
+  this._toggleButtonState();
 }
 
+disableSubmitButton (submitButton) {
+  submitButton.classList.add(this._inactiveButtonClass);
+  submitButton.disabled = true;
+};
 
 // Функция, которая показывает ошибку
 _showInputError = (formElement, inputElement, errorMessage) => {

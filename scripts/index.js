@@ -1,7 +1,7 @@
 
 import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   editButton, newPostButton, profilePopup, cardPopup, formProfile,
-  closeProfileButton, closeNewPostButton, cardContainer,
+  closeProfileButton, closeNewPostButton, closeCardButton, openPicPopup, cardContainer,
   cardNameInput,
   cardPicInput, formNewPost, selectors, initialCards
 } from './constants.js';
@@ -9,13 +9,14 @@ import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
 
+function createCard(item) {
+  const card = new Card(item, '.template-card');
+  return card.generateCard();
+} 
+
   //рендер карточек из массива
   initialCards.forEach((item) => {
-    const card = new Card(item, '.template-card');
-    const cardElement = card.generateCard();
-
-    // Добавляем в DOM
-    cardContainer.append(cardElement);
+    cardContainer.append(createCard(item, '.template-card'));
   });
 
 
@@ -23,6 +24,7 @@ import {FormValidator} from './FormValidator.js';
 export function openPopup(popupElement) {
   document.addEventListener('keydown', handleClosePopup)
   popupElement.addEventListener('click', handleClosePopup)
+  popupElement.addEventListener('click', handleClosePopupByOverlay)
   popupElement.classList.add('popup_opened');
 }
 
@@ -31,13 +33,20 @@ export function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleClosePopup)
   popupElement.removeEventListener('click', handleClosePopup)
+  popupElement.removeEventListener('click', handleClosePopupByOverlay)
 }
 
 //закрытие любого попапа кликом на оверлей
 const handleClosePopup = (evt) => {
   const popupActive = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape' || evt.target === evt.currentTarget) {
+  if (evt.key === 'Escape') {
     closePopup(popupActive)
+  }
+}
+
+const handleClosePopupByOverlay = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target)
   }
 }
 
@@ -66,6 +75,10 @@ closeNewPostButton.addEventListener('click', function() {
   closePopup(cardPopup)
 });
 
+closeCardButton.addEventListener('click', function() {
+  closePopup(openPicPopup)
+});
+
 
 
 
@@ -78,15 +91,11 @@ function handleCardSubmit (evt) {
     name: cardNameInput.value,
   }
 
-  const card = new Card(cardInputs, '.template-card');
-  const cardElement = card.generateCard();
-
   // Добавляем в DOM
-  cardContainer.prepend(cardElement);
+  cardContainer.prepend(createCard(cardInputs, '.template-card'));
   closePopup(cardPopup);
   formNewPost.reset();
-  newPostSaveButton.classList.add('button_inactive');
-  newPostSaveButton.disabled = true;
+  validationNewPlace.disableSubmitButton(newPostSaveButton);
 }
 
 //сохранение новой карточки и закрытие попапа
@@ -106,14 +115,12 @@ editButton.addEventListener('click', function() {
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
   openPopup(profilePopup);
-  validationEditProfile.hideInputError(formProfile, newProfileTitle);
-  validationEditProfile.hideInputError(formProfile, newProfileSubtitle);
+  validationEditProfile.resetValidation();
 });
 
 //открытие формы создания карточки
 newPostButton.addEventListener('click', function() {
   formNewPost.reset();
-  openPopup(cardPopup)
-  validationNewPlace.hideInputError(formNewPost, cardNameInput);
-  validationNewPlace.hideInputError(formNewPost, cardPicInput);
+  openPopup(cardPopup);
+  validationNewPlace.resetValidation();
 });
