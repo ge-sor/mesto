@@ -45,6 +45,7 @@ export class Card {
       fullscreenText.textContent = this._title;
       openPopup(openPicPopup);
     }
+    
     _handleClosePopup = (evt) => {
         if (evt.key === 'Escape' || evt.target === closeCardButton || evt.target === evt.currentTarget) {
       closePopup(openPicPopup);

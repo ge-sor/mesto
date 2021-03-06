@@ -124,3 +124,4 @@ newPostButton.addEventListener('click', function() {
   openPopup(cardPopup);
   validationNewPlace.resetValidation();
 });
+

@@ -12,8 +12,11 @@ export class FormValidator {
     this._buttonElement = this._formObject.querySelector(this._submitButtonSelector);
 };
 
+
 resetValidation() {
-  this._inputList.forEach(this.hideInputError);
+  this._inputList.forEach((item) => {
+    this.hideInputError(this._formObject, item)
+  });
   this._toggleButtonState;
 };
 
