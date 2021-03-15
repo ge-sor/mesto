@@ -8,6 +8,7 @@ import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
+//hi
 
 function createCard(item) {
   const card = new Card(item, '.template-card');
