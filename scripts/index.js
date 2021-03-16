@@ -5,21 +5,21 @@ import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
   cardNameInput,
   cardPicInput, formNewPost, selectors, initialCards
 } from './constants.js';
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
-//hi
 
-function createCard(item) {
-  const card = new Card(item, '.template-card');
-  return card.generateCard();
-}
+const cardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.template-card');
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+  }
+}, cardContainer)
 
-  //рендер карточек из массива
-  initialCards.forEach((item) => {
-    cardContainer.append(createCard(item, '.template-card'));
-  });
-
+cardList.renderItems();
 
 //функция открытия попапов
 export function openPopup(popupElement) {

@@ -1,7 +1,7 @@
 
 import {openPicPopup, closeCardButton, fullscreenImage, fullscreenText} from './constants.js';
 import {openPopup, closePopup} from './index.js';
-export class Card {
+export default class Card {
     constructor(data, cardSelector) {
       this._title = data.name;
       this._image = data.link;
@@ -45,7 +45,7 @@ export class Card {
       fullscreenText.textContent = this._title;
       openPopup(openPicPopup);
     }
-    
+
     _handleClosePopup = (evt) => {
         if (evt.key === 'Escape' || evt.target === closeCardButton || evt.target === evt.currentTarget) {
       closePopup(openPicPopup);
