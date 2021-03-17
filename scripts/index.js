@@ -8,6 +8,7 @@ import {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import Popup from './Popup.js';
 
 
 const cardList = new Section({
@@ -37,7 +38,10 @@ export function closePopup(popupElement) {
   popupElement.removeEventListener('click', handleClosePopupByOverlay)
 }
 
-//закрытие любого попапа кликом на оверлей
+const newPopup = new Popup(profilePopup)
+
+
+/* //закрытие любого попапа кликом на оверлей
 const handleClosePopup = (evt) => {
   const popupActive = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
@@ -50,20 +54,6 @@ const handleClosePopupByOverlay = (evt) => {
     closePopup(evt.target)
   }
 }
-
-//сохранение изменений данных профиля и закрытие попапа профиля
-function handleProfileSubmit (evt) {
-  evt.preventDefault();
-  profileTitle.textContent = newProfileTitle.value;
-  profileSubtitle.textContent = newProfileSubtitle.value;
-  closePopup(profilePopup)
-}
-
-
-
-
-//сохранение профиля и закрытие попапа
-formProfile.addEventListener('submit', handleProfileSubmit);
 
 
 //закрытие попапа профиля по щелчку на крестик
@@ -79,6 +69,22 @@ closeNewPostButton.addEventListener('click', function() {
 closeCardButton.addEventListener('click', function() {
   closePopup(openPicPopup)
 });
+ */
+
+//сохранение изменений данных профиля и закрытие попапа профиля
+function handleProfileSubmit (evt) {
+  evt.preventDefault();
+  profileTitle.textContent = newProfileTitle.value;
+  profileSubtitle.textContent = newProfileSubtitle.value;
+  newPopup.close();
+}
+
+
+
+
+//сохранение профиля и закрытие попапа
+formProfile.addEventListener('submit', handleProfileSubmit);
+
 
 
 
@@ -115,7 +121,7 @@ validationNewPlace.enableValidation();
 editButton.addEventListener('click', function() {
   newProfileTitle.value = profileTitle.textContent;
   newProfileSubtitle.value = profileSubtitle.textContent;
-  openPopup(profilePopup);
+  newPopup.open();
   validationEditProfile.resetValidation();
 });
 

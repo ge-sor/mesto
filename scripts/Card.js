@@ -38,13 +38,13 @@ export default class Card {
    _deleteCard(evt) {
       evt.target.closest('.card').remove();}
 
-  //попап карточки
+ /*  //попап карточки
     _handleOpenPopup() {
       fullscreenImage.src = this._image;
       fullscreenImage.alt = this._title;
       fullscreenText.textContent = this._title;
       openPopup(openPicPopup);
-    }
+    } */
 
     _handleClosePopup = (evt) => {
         if (evt.key === 'Escape' || evt.target === closeCardButton || evt.target === evt.currentTarget) {
