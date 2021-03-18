@@ -22,8 +22,11 @@ const cardList = new Section({
 
 cardList.renderItems();
 
+const newPopup = new Popup(profilePopup)
+
+
 //функция открытия попапов
-export function openPopup(popupElement) {
+/*  function openPopup(popupElement) {
   document.addEventListener('keydown', handleClosePopup)
   popupElement.addEventListener('click', handleClosePopup)
   popupElement.addEventListener('click', handleClosePopupByOverlay)
@@ -31,17 +34,16 @@ export function openPopup(popupElement) {
 }
 
 //функция закрытия попапов
-export function closePopup(popupElement) {
+  function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleClosePopup)
   popupElement.removeEventListener('click', handleClosePopup)
   popupElement.removeEventListener('click', handleClosePopupByOverlay)
 }
 
-const newPopup = new Popup(profilePopup)
 
 
-/* //закрытие любого попапа кликом на оверлей
+ //закрытие любого попапа кликом на оверлей
 const handleClosePopup = (evt) => {
   const popupActive = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
@@ -54,7 +56,6 @@ const handleClosePopupByOverlay = (evt) => {
     closePopup(evt.target)
   }
 }
-
 
 //закрытие попапа профиля по щелчку на крестик
 closeProfileButton.addEventListener('click', function() {
