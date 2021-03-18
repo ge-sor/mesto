@@ -4,9 +4,11 @@ export default class UserInfo {
     this._caption = data.caption;
   }
   getUserInfo() {
-
+    newProfileTitle.value = profileTitle.textContent;
+    newProfileSubtitle.value = profileSubtitle.textContent;
   }
   setUserInfo() {
-
+    profileTitle.textContent = newProfileTitle.value;
+    profileSubtitle.textContent = newProfileSubtitle.value;
   }
 }

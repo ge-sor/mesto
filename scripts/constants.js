@@ -1,25 +1,5 @@
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-const newProfileTitle = document.querySelector('.form__input_type_name');
-const newProfileSubtitle = document.querySelector('.form__input_type_caption');
-const editButton = document.querySelector('.profile__edit-btn');
-const newPostButton = document.querySelector(".profile__post-btn");
-const profilePopup = '.popup_type_edit-profile';
-const cardPopup = document.querySelector('.popup_type_new-post');
-const formProfile = document.querySelector('.form_type_profile');
-const closeProfileButton = document.querySelector('.popup__close-btn_profile');
-const closeNewPostButton = document.querySelector(".popup__close-btn_new-card");
-const cardContainer = '.cards__list';
-const openPicPopup = document.querySelector('.popup_type_fullscreen-pic');
-const closeCardButton = document.querySelector('.popup__close-btn_fullscreen-pic');
-const cardNameInput = document.querySelector(".form__input_type_place-name");
-const cardPicInput = document.querySelector(".form__input_type_pic");
-const formNewPost = document.querySelector(".form_type_new-post");
-const fullscreenImage = document.querySelector('.popup__image-fullscreen');
-const fullscreenText = document.querySelector('.popup__text-fullscreen');
-const popupElement = document.querySelector('.popup');
-const closePopupButton = '.popup__close-btn';
-const selectors = {
+
+export const selectors = {
     formSelector: '.form',
     inputSelector: '.form__input',
     submitButtonSelector: '.form__submit',
@@ -27,7 +7,7 @@ const selectors = {
     inputErrorClass: 'form__input_type_error',
     formSetSelector: '.form__set'
   }
-const initialCards = [
+export const initialCards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -53,12 +33,24 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
+  export const cardContainer = '.cards__list';
+  export const profilePopupSelector = '.popup_type_edit-profile';
+  export const newPostPopupSelector = '.popup_type_new-post';
+  export const cardPopupSelector = '.popup_type_fullscreen-pic';
 
-
-export {profileTitle, profileSubtitle, newProfileTitle,  newProfileSubtitle,
-    editButton, newPostButton, profilePopup, cardPopup, formProfile,
-    closeProfileButton, closeNewPostButton, cardContainer,
-    openPicPopup, closeCardButton, cardNameInput,
-    cardPicInput, formNewPost, fullscreenImage, fullscreenText, popupElement, selectors, initialCards,
-    closePopupButton
-}
+  export const profileTitle = document.querySelector('.profile__title');
+  export const profileSubtitle = document.querySelector('.profile__subtitle');
+  export const newProfileTitle = document.querySelector('.form__input_type_name');
+  export const newProfileSubtitle = document.querySelector('.form__input_type_caption');
+  export const editButton = document.querySelector('.profile__edit-btn');
+  export const newPostButton = document.querySelector(".profile__post-btn");
+  export const formProfile = document.querySelector('.form_type_profile');
+  export const closeProfileButton = document.querySelector('.popup__close-btn_profile');
+  export const closeNewPostButton = document.querySelector(".popup__close-btn_new-card");
+  export const closeCardButton = document.querySelector('.popup__close-btn_fullscreen-pic');
+  export const cardNameInput = document.querySelector(".form__input_type_place-name");
+  export const cardPicInput = document.querySelector(".form__input_type_pic");
+  export const formNewPost = document.querySelector(".form_type_new-post");
+  export const fullscreenImage = document.querySelector('.popup__image-fullscreen');
+  export const fullscreenText = document.querySelector('.popup__text-fullscreen');
+  export const popupElement = document.querySelector('.popup');

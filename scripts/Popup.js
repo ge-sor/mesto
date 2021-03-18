@@ -1,4 +1,3 @@
-import { closePopupButton } from './constants.js'
 
 export default class Popup {
   constructor(popupSelector) {
@@ -13,13 +12,13 @@ export default class Popup {
   _handleEscClose = (evt) => {
     const popupActive = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
-      close(popupActive)
+      this.close(popupActive)
     }
   }
   setEventListeners() {
     this._popup
-    .querySelector(closePopupButton)
-    .addEventListener('click', close())
+    .querySelector('.popup__close-btn')
+    .addEventListener('click', this.close())
 
     document.addEventListener('keydown', this._handleEscClose)
   }

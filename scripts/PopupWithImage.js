@@ -8,9 +8,9 @@ export default class PopupPopupWithImage extends Popup {
   }
   open() {
     document.querySelector(popupSelector)
-    super._popup.querySelector('.popup__image-fullscreen').src = this._image;
-    super._popup.querySelector('.popup__image-fullscreen').alt = this._title;
-    super._popup.querySelector('.popup__text-fullscreen').textContent = this._title;
+    this._popup.querySelector('.popup__image-fullscreen').src = this._image;
+    this._popup.querySelector('.popup__image-fullscreen').alt = this._title;
+    this._popup.querySelector('.popup__text-fullscreen').textContent = this._title;
     super.open();
   }
 }
