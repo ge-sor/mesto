@@ -50,9 +50,7 @@ const profilePopup = new PopupWithForm({
   handleFormSubmit: () => {
     const user = new UserInfo('.form__input_type_name', '.form__input_type_caption');
     user.getUserInfo();
-    user.setUserInfo();
-  profilePopup.open();
-  profilePopup.setEventListeners()
+
   }});
 const newPostPopup = new PopupWithForm({
   popupSelector: newPostPopupSelector,
@@ -60,18 +58,28 @@ const newPostPopup = new PopupWithForm({
     const card = new Card({
       data: formData,
       handleCardClick: () => {
-        cardPopup.open();
+
+        cardPopup.open(data);
       }
     }, '.template-card');
+
     const cardElement = card.generateCard();
     cardList.addItemToStart(cardElement);
-    cardPopup.close();
   }
 });
+
+
 const cardPopup = new PopupWithImage(cardPopupSelector);
 
-newPostButton.addEventListener('click', () => {newPostPopup.open()})
-editButton.addEventListener('click', () => {profilePopup.open()})
+newPostButton.addEventListener('click', () => {
+  newPostPopup.open();
+  newPostPopup.setEventListeners();
+  validationNewPlace.enableValidation();
+})
+editButton.addEventListener('click', () => {
+  profilePopup.open();
+  validationEditProfile.enableValidation();
+})
 
 
 

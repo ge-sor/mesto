@@ -4,9 +4,8 @@ export default class UserInfo {
     this._caption = document.querySelector(caption);
   }
   getUserInfo() {
-    this._user = {}
-    this._user.name = this._name.textContent;
-    this._user.caption = this._caption.textContent;
+    this._name.value = this._name.textContent;
+    this._caption.value = this._caption.textContent;
     return this._user;
   }
   setUserInfo() {
