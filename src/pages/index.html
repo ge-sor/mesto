@@ -8,18 +8,17 @@
     <meta name="author" content="Герман Сорокин" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="./images/header__logo.svg" alt="логотип" />
+      <img class="header__logo" src="<%=require('./images/header__logo.svg')%>" alt="логотип" />
     </header>
 
     <main class="content">
       <section class="profile">
         <img
           class="profile__pic"
-          src="./images/profile__pic.jpg"
+          src="<%=require('./images/profile__pic.jpg')%>"
           alt="фото профиля"
         />
         <h1 class="profile__title">Жак-Ив Кусто</h1>

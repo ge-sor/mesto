@@ -6,6 +6,7 @@ export const selectors = {
     inputErrorClass: 'form__input_type_error',
     formSetSelector: '.form__set'
   }
+
 export const initialCards = [
     {
       name: 'Архыз',
