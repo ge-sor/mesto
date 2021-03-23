@@ -1,11 +1,9 @@
-
-import {openPicPopup, closeCardButton, fullscreenImage, fullscreenText} from './constants.js';
-import {openPopup, closePopup} from './index.js';
-export class Card {
-    constructor(data, cardSelector) {
+export default class Card {
+    constructor({data, handleCardClick}, cardSelector) {
       this._title = data.name;
       this._image = data.link;
       this._cardSelector = cardSelector;
+      this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -36,28 +34,14 @@ export class Card {
 
   //удаление карточки
    _deleteCard(evt) {
-      evt.target.closest('.card').remove();}
-
-  //попап карточки
-    _handleOpenPopup() {
-      fullscreenImage.src = this._image;
-      fullscreenImage.alt = this._title;
-      fullscreenText.textContent = this._title;
-      openPopup(openPicPopup);
-    }
-    
-    _handleClosePopup = (evt) => {
-        if (evt.key === 'Escape' || evt.target === closeCardButton || evt.target === evt.currentTarget) {
-      closePopup(openPicPopup);
-    }
+      evt.target.closest('.card').remove();
     }
 
     _setEventListeners() {
       this._element.querySelector('.card__like-btn').addEventListener('click', this._likeCard);
       this._element.querySelector('.card__delete-btn').addEventListener('click', this._deleteCard);
-      this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleOpenPopup()
-    });
+      this._element.querySelector('.card__image').addEventListener('click', this._handleCardClick)
+    };
 
   }
-}
+
