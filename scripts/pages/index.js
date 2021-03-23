@@ -1,33 +1,24 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import Popup from './Popup.js';
 import {
-  profileTitle,
-  profileSubtitle,
-  newProfileTitle,
-  newProfileSubtitle,
   editButton,
   newPostButton,
   profilePopupSelector,
   newPostPopupSelector,
   cardPopupSelector,
   formProfile,
-  closeProfileButton,
-  closeNewPostButton,
-  closeCardButton,
   cardContainer,
-  cardNameInput,
-  cardPicInput,
   formNewPost,
   selectors,
   initialCards
-} from './constants.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import UserInfo from './UserInfo.js';
+} from '../utils/constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
 const cardPopup = new PopupWithImage(cardPopupSelector);
+const user = new UserInfo('.profile__title', '.profile__subtitle');
 
 //добавляем в DOM карточки из заготовленного маcсива initialCards
 const cardList = new Section({
@@ -46,16 +37,15 @@ const cardList = new Section({
 cardList.renderItems();
 cardPopup.setEventListeners();
 
-const user = new UserInfo('.profile__title', '.profile__subtitle');
-
-console.log(user.getUserInfo())
-
+//функция изменения данных профиля
 const profilePopup = new PopupWithForm({
   popupSelector: profilePopupSelector,
   handleFormSubmit: () => {
     user.setUserInfo();
+    validationEditProfile.enableValidation();
   }});
 
+//функция добавления новой карточки
 const newPostPopup = new PopupWithForm({
   popupSelector: newPostPopupSelector,
   handleFormSubmit: (item) => {
@@ -65,13 +55,21 @@ const newPostPopup = new PopupWithForm({
         cardPopup.open(item.name, item.link);
       }
     }, '.template-card');
-
     const cardElement = card.generateCard();
     cardList.addItemToStart(cardElement);
   }
 });
 
+//открытие формы изменения профиля
+editButton.addEventListener('click', () => {
+  profilePopup.open();
+  user.getUserInfo();
+  validationEditProfile.enableValidation();
+})
 
+profilePopup.setEventListeners();
+
+//открытие формы добавления новой карточки
 newPostButton.addEventListener('click', () => {
   newPostPopup.open();
   validationNewPlace.enableValidation();
@@ -79,23 +77,11 @@ newPostButton.addEventListener('click', () => {
 
 newPostPopup.setEventListeners();
 
-
-editButton.addEventListener('click', () => {
-  
-  profilePopup.open();
-  user.getUserInfo();
-  
-  validationEditProfile.enableValidation();
-})
-
-
-profilePopup.setEventListeners();
-
-//включаем валидацию форм профиля
+//включение валидации форм профиля
 const validationEditProfile = new FormValidator(selectors, formProfile);
 validationEditProfile.enableValidation();
 
-//включаем валидацию форм создания карточки
+//включение валидации форм создания карточки
 const validationNewPlace = new FormValidator(selectors, formNewPost);
 validationNewPlace.enableValidation();
 
