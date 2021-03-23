@@ -25,7 +25,7 @@ disableSubmitButton (submitButton) {
 };
 
 // Функция, которая скрывает ошибку
-hideInputError = (formElement, inputElement) => {
+hideInputError (formElement, inputElement)  {
   // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(this._inputErrorClass);
@@ -34,7 +34,7 @@ hideInputError = (formElement, inputElement) => {
 
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
-_toggleButtonState = (inputList, buttonElement) => {
+_toggleButtonState (inputList, buttonElement) {
   // Если есть хотя бы один невалидный инпут
   if (this._hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
@@ -49,7 +49,7 @@ _toggleButtonState = (inputList, buttonElement) => {
 
 
 // Функция, которая показывает ошибку
-_showInputError = (formElement, inputElement, errorMessage) => {
+_showInputError (formElement, inputElement, errorMessage) {
   // Находим элемент ошибки внутри самой функции
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(this._inputErrorClass);
@@ -62,7 +62,7 @@ _showInputError = (formElement, inputElement, errorMessage) => {
 formElement — html-элемент формы, в которой находится проверяемое поле ввода.
 Он нужен для поиска элемента ошибки в форме.
 inputElement — проверяемое поле ввода. */
-checkInputValidity = (formElement, inputElement) => {
+checkInputValidity (formElement, inputElement) {
   if (!inputElement.validity.valid) {
     // showInputError получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
@@ -76,7 +76,7 @@ checkInputValidity = (formElement, inputElement) => {
 
 
 // Функция принимает массив полей
-_hasInvalidInput = (inputList) => {
+_hasInvalidInput (inputList) {
   return inputList.some((inputElement) => {
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся фунцкция
@@ -85,7 +85,7 @@ _hasInvalidInput = (inputList) => {
 })
 }
 
-_setEventListeners = (formElement) => {
+_setEventListeners (formElement) {
   // Найдём все поля формы и сделаем из них массив
   const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
   // Найдём в текущей форме кнопку отправки
@@ -102,7 +102,7 @@ _setEventListeners = (formElement) => {
   });
 };
 
- enableValidation = () => {
+ enableValidation () {
   this._formObject.addEventListener('submit', function(evt) {
     evt.preventDefault();
   });
