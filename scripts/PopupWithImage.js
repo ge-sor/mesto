@@ -2,11 +2,10 @@ import Popup from './Popup.js';
 
 export default class PopupPopupWithImage extends Popup {
 
-  open(image, title) {
-    this._popup.querySelector('.popup__image-fullscreen').src = image;
-    this._popup.querySelector('.popup__image-fullscreen').alt = title;
-    this._popup.querySelector('.popup__text-fullscreen').textContent = title;
+  open(name, link) {
+    this._popup.querySelector('.popup__image-fullscreen').src = link;
+    this._popup.querySelector('.popup__image-fullscreen').alt = name;
+    this._popup.querySelector('.popup__text-fullscreen').textContent = name;
     super.open();
-    super.setEventListeners();
   }
 }

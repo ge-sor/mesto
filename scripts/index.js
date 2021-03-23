@@ -27,6 +27,7 @@ import PopupWithForm from './PopupWithForm.js';
 import PopupWithImage from './PopupWithImage.js';
 import UserInfo from './UserInfo.js';
 
+const cardPopup = new PopupWithImage(cardPopupSelector);
 
 //добавляем в DOM карточки из заготовленного маcсива initialCards
 const cardList = new Section({
@@ -35,7 +36,7 @@ const cardList = new Section({
     const card = new Card({
       data: item,
       handleCardClick: () => {
-        cardPopup.open();
+        cardPopup.open(item.name, item.link);
       }
     }, '.template-card');
     const cardElement = card.generateCard();
@@ -43,23 +44,25 @@ const cardList = new Section({
   }
 }, cardContainer)
 cardList.renderItems();
+cardPopup.setEventListeners();
 
+const user = new UserInfo('.profile__title', '.profile__subtitle');
+
+console.log(user.getUserInfo())
 
 const profilePopup = new PopupWithForm({
   popupSelector: profilePopupSelector,
   handleFormSubmit: () => {
-    const user = new UserInfo('.form__input_type_name', '.form__input_type_caption');
-    user.getUserInfo();
-
+    user.setUserInfo();
   }});
+
 const newPostPopup = new PopupWithForm({
   popupSelector: newPostPopupSelector,
-  handleFormSubmit: (formData) => {
+  handleFormSubmit: (item) => {
     const card = new Card({
-      data: formData,
+      data: item,
       handleCardClick: () => {
-
-        cardPopup.open(data);
+        cardPopup.open(item.name, item.link);
       }
     }, '.template-card');
 
@@ -69,19 +72,24 @@ const newPostPopup = new PopupWithForm({
 });
 
 
-const cardPopup = new PopupWithImage(cardPopupSelector);
-
 newPostButton.addEventListener('click', () => {
   newPostPopup.open();
-  newPostPopup.setEventListeners();
   validationNewPlace.enableValidation();
 })
+
+newPostPopup.setEventListeners();
+
+
 editButton.addEventListener('click', () => {
+  
   profilePopup.open();
+  user.getUserInfo();
+  
   validationEditProfile.enableValidation();
 })
 
 
+profilePopup.setEventListeners();
 
 //включаем валидацию форм профиля
 const validationEditProfile = new FormValidator(selectors, formProfile);

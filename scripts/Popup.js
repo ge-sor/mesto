@@ -10,8 +10,9 @@ export default class Popup {
 
   close() {
     this._popup.classList.remove('popup_opened');
-    this._popup.querySelector('.popup__close-btn')
-    .removeEventListener('click', () => this.close())
+    this._popup
+    .querySelector('.popup__close-btn')
+    .removeEventListener('click', this.close.bind(this))
     document.removeEventListener('keydown', this._handleEscClose.bind(this))
   }
 
@@ -24,7 +25,7 @@ export default class Popup {
   setEventListeners() {
     this._popup
     .querySelector('.popup__close-btn')
-    .addEventListener('click', () => this.close())
+    .addEventListener('click', this.close.bind(this))
 
     document.addEventListener('keydown', this._handleEscClose.bind(this))
 
