@@ -39,9 +39,13 @@ export const initialCards = [
   export const cardPopupSelector = '.popup_type_fullscreen-pic';
 
   export const editButton = document.querySelector('.profile__edit-btn');
-  export const newPostButton = document.querySelector(".profile__post-btn");
+  export const profileName = document.querySelector('.profile__title');
+  export const profileCaption = document.querySelector('.profile__subtitle');
+  export const profileNameInput = document.querySelector('.form__input_type_name');
+  export const profileCaptionInput = document.querySelector('.form__input_type_caption');
+  export const newPostButton = document.querySelector('.profile__post-btn');
   export const formProfile = document.querySelector('.form_type_profile');
-  export const formNewPost = document.querySelector(".form_type_new-post");
+  export const formNewPost = document.querySelector('.form_type_new-post');
   export const fullscreenImage = document.querySelector('.popup__image-fullscreen');
   export const fullscreenText = document.querySelector('.popup__text-fullscreen');
   export const popupElement = document.querySelector('.popup');

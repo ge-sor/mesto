@@ -1,14 +1,16 @@
 export default class UserInfo {
   constructor(name, caption) {
-    this._name = document.querySelector(name);
-    this._caption = document.querySelector(caption);
+    this._name = name;
+    this._caption = caption;
   }
   getUserInfo() {
-    document.querySelector('.form__input_type_name').value = this._name.textContent;
-    document.querySelector('.form__input_type_caption').value = this._caption.textContent;
+    this._user = {};
+    this._user.name = this._name.textContent;
+    this._user.caption = this._caption.textContent;
+    return this._user
   }
-  setUserInfo() {
-    this._name.textContent = document.querySelector('.form__input_type_name').value;
-    this._caption.textContent = document.querySelector('.form__input_type_caption').value;
+  setUserInfo({name, caption}) {
+    this._name.textContent = name;
+    this._caption.textContent = caption;
   }
 }
