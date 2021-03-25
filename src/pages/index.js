@@ -1,4 +1,4 @@
-import './pages/index.css';
+import './index.css';
 import {
   editButton,
   newPostButton,
@@ -14,13 +14,13 @@ import {
   profileCaptionInput,
   selectors,
   initialCards
-} from './scripts/utils/constants.js';
-import Card from './scripts/components/Card.js';
-import FormValidator from './scripts/components/FormValidator.js';
-import Section from './scripts/components/Section.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
-import PopupWithImage from './scripts/components/PopupWithImage.js';
-import UserInfo from './scripts/components/UserInfo.js';
+} from '../scripts/utils/constants.js';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
 const cardPopup = new PopupWithImage(cardPopupSelector);
 const defaultUser = new UserInfo(profileName, profileCaption);
@@ -28,16 +28,20 @@ const defaultUser = new UserInfo(profileName, profileCaption);
 const validationEditProfile = new FormValidator(selectors, formProfile);
 const validationNewPlace = new FormValidator(selectors, formNewPost);
 
+const createCard = function(item) {
+  return new Card({
+    data: item,
+    handleCardClick: () => {
+      cardPopup.openImage(item.name, item.link);
+    }
+  }, '.template-card');
+};
+
 //добавляем в DOM карточки из заготовленного маcсива initialCards
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card({
-      data: item,
-      handleCardClick: () => {
-        cardPopup.openImage(item.name, item.link);
-      }
-    }, '.template-card');
+    const card = createCard(item);
     const cardElement = card.generateCard();
     cardList.addItemToEnd(cardElement);
   }
@@ -56,19 +60,11 @@ const profilePopup = new PopupWithForm(
 const newPostPopup = new PopupWithForm(
   newPostPopupSelector, {
     handleFormSubmit: (item) => {
-    const card = new Card({
-      data: item,
-      handleCardClick: () => {
-        cardPopup.openImage(item.name, item.link);
-      }
-    }, '.template-card');
+    const card = createCard(item);
     const cardElement = card.generateCard();
     cardList.addItemToStart(cardElement);
   }
 });
-
-validationEditProfile.enableValidation();
-validationNewPlace.enableValidation();
 
 //открытие формы изменения профиля
 editButton.addEventListener('click', () => {
@@ -78,15 +74,18 @@ editButton.addEventListener('click', () => {
   profileCaptionInput.value = userData.caption;
   validationEditProfile.resetValidation();
 })
-profilePopup.setEventListeners();
 
 //открытие формы добавления новой карточки
 newPostButton.addEventListener('click', () => {
   newPostPopup.open();
   validationNewPlace.resetValidation();
 })
+
+validationEditProfile.enableValidation();
+validationNewPlace.enableValidation();
+
+cardPopup.setEventListeners();
 newPostPopup.setEventListeners();
-
-
+profilePopup.setEventListeners();
 
 

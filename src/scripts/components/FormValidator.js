@@ -14,18 +14,15 @@ export default class FormValidator {
 
 resetValidation() {
   this._inputList.forEach((item) => {
-    this.hideInputError(this._formObject, item)
+    this._hideInputError(this._formObject, item)
   });
   this._toggleButtonState;
-};
-
-disableSubmitButton (submitButton) {
-  submitButton.classList.add(this._inactiveButtonClass);
-  submitButton.disabled = true;
+  this._buttonElement.classList.add(this._inactiveButtonClass);
+  this._buttonElement.disabled = true;
 };
 
 // Функция, которая скрывает ошибку
-hideInputError (formElement, inputElement)  {
+_hideInputError (formElement, inputElement)  {
   // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(this._inputErrorClass);
@@ -62,7 +59,7 @@ _showInputError (formElement, inputElement, errorMessage) {
 formElement — html-элемент формы, в которой находится проверяемое поле ввода.
 Он нужен для поиска элемента ошибки в форме.
 inputElement — проверяемое поле ввода. */
-checkInputValidity (formElement, inputElement) {
+_checkInputValidity (formElement, inputElement) {
   if (!inputElement.validity.valid) {
     // showInputError получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
@@ -70,7 +67,7 @@ checkInputValidity (formElement, inputElement) {
   } else {
     // hideInputError получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
-    this.hideInputError(formElement, inputElement);
+    this._hideInputError(formElement, inputElement);
   }
 };
 
@@ -94,7 +91,7 @@ _setEventListeners (formElement) {
   this._toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      this.checkInputValidity(formElement, inputElement);
+      this._checkInputValidity(formElement, inputElement);
 
       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
       this._toggleButtonState(inputList, buttonElement)
