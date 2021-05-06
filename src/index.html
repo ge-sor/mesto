@@ -16,13 +16,14 @@
 
     <main class="content">
       <section class="profile">
-        <img
-          class="profile__pic"
-          src="<%=require('./images/profile__pic.jpg')%>"
-          alt="фото профиля"
-        />
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <div class="profile__avatar">
+         <img
+           class="profile__pic"
+           src=""
+            alt="фото профиля" />
+         </div>
+        <h1 class="profile__title"></h1>
+        <p class="profile__subtitle"></p>
         <button type="button" class="button profile__edit-btn"></button>
         <button type="button" class="button profile__post-btn"></button>
       </section>
@@ -136,6 +137,54 @@
       </div>
     </section>
 
+    <section id="popup-edit-avatar" class="popup popup_type_edit-avatar">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="button popup__close-btn popup__close-btn_avatar"
+        ></button>
+        <h2 class="popup__title">Обновить&nbsp;аватар</h2>
+        <form
+          novalidate
+          class="form form_type_avatar"
+          id="form-avatar"
+          name="form-avatar"
+        >
+          <fieldset class="form__set">
+            <label class="form__field">
+              <input
+                id="url-input"
+                type="url"
+                class="form__input form__input_type_avatar"
+                name="link"
+                required
+                placeholder="Ссылка на аватар"
+              />
+              <span class="url-input-error form__input-error"></span>
+            </label>
+
+            <button type="submit" class="form__submit button popup__save-btn popup__save-btn_type_avatar-save">
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <section id="popup-confirm" class="popup popup_type_confirm">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="button popup__close-btn popup__close-btn_confirm"
+        ></button>
+        <h2 class="popup__title">Вы&nbsp;уверены?</h2>
+
+            <button type="submit" class="form__submit button popup__save-btn popup__save-btn_type_confirm">
+              Да
+            </button>
+      </div>
+    </section>
+
     <section id="popup-fullscreen-pic" class="popup popup_type_fullscreen-pic">
       <div class="popup__container-pic">
         <button
@@ -152,7 +201,10 @@
         <img class="card__image" src="#" alt="#" />
         <div class="card__caption">
           <h2 class="card__text"></h2>
+          <div class="card__likes-container">
           <button type="button" class="button card__like-btn"></button>
+          <p class="card__likes">0</p>
+        </div>
         </div>
         <button type="button" class="button card__delete-btn"></button>
       </li>
