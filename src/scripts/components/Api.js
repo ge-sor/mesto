@@ -1,121 +1,88 @@
 export default class Api {
   constructor(config) {
-    this.url = config.url;
-    this.headers = config.headers;
-    this.body = config.body;
+    this._url = config.url;
+    this._headers = config.headers;
+    this._body = config.body;
   }
-  getInfo() {
-    return fetch(this.url, {
-      headers: this.headers,
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
 
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
+  _getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
+  getCardsInfo() {
+    return fetch(`${this._url}cards`, {
+      headers: this._headers,
     })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
+  }
+
+  getUserInfo() {
+    return fetch(`${this._url}users/me`, {
+      headers: this._headers,
+    })
+    .then(res => this._getResponseData(res))
   }
 
    updateUserInfo(user) {
-    return fetch(this.url, {
+    return fetch(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: user.name,
         about: user.about,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
-    })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
   }
 
   updateAvatar(user) {
-    return fetch(this.url, {
+    return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         avatar: user.avatar,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
-    })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
   }
 
   newCard(card) {
-    return fetch(this.url, {
+    return fetch(`${this._url}cards`, {
       method: 'POST',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: card.name,
         link: card.link,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
-    })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
   }
 
   deleteCard(id) {
-    return fetch(`${this.url}/${id}`, {
+    return fetch(`${this._url}cards/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
-    })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
   }
 
   likeCard(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${id}`, {
+    return fetch(`${this._url}cards/likes/${id}`, {
       method: 'PUT',
-      headers: this.headers,
+      headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
-    })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
   }
 
   deleteLikeCard(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${id}`, {
+    return fetch(`${this._url}cards/likes/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(new Error(`ошибочка ${res.status}`));
-    })
-    .catch(err => Promise.reject(err));
+    .then(res => this._getResponseData(res))
   }
+  
 }

@@ -3,6 +3,7 @@ export default class Card {
     { data, handleCardClick, handleLikeClick, handleDeleteIconClick },
     cardSelector
   ) {
+    this._item = data.item;
     this._title = data.item.name;
     this._cardOwner = data.item.owner._id;
     this._userId = data.currentUserId;
@@ -23,6 +24,28 @@ export default class Card {
     return cardElement;
   }
 
+  updateCardLikes(data, hasLike) {
+    this._element.querySelector(
+      ".card__likes"
+    ).textContent = data.likes.length;
+
+      if (hasLike) {
+        this._element
+          .querySelector(".card__like-btn")
+          .classList.remove("card__like-btn_active");
+      }
+      else {
+        this._element
+          .querySelector(".card__like-btn")
+          .classList.add("card__like-btn_active");
+      }
+
+  }
+
+  deleteCard(evt) {
+    evt.target.closest('.card').remove();
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
@@ -30,11 +53,10 @@ export default class Card {
     const cardImage = this._element.querySelector(".card__image");
     cardImage.src = this._image;
     cardImage.alt = this._title;
+    this._element.querySelector(".card__text").textContent = this._title;
     this._element.querySelector(
       ".card__likes"
     ).textContent = this._likes.length;
-    this._element.querySelector(".card__text").textContent = this._title;
-
     if (this._cardOwner === this._userId) {
       this._element
         .querySelector(".card__delete-btn")

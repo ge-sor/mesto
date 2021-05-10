@@ -31,24 +31,8 @@ import PopupWithSubmit from "../scripts/components/PopupWithSubmit.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
 
-const cards = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-23/cards",
-  headers: {
-    authorization: "28646914-f7f6-4f3a-9670-3cfb13a383dd",
-    "Content-Type": "application/json",
-  },
-};
-
-const user = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-23/users/me",
-  headers: {
-    authorization: "28646914-f7f6-4f3a-9670-3cfb13a383dd",
-    "Content-Type": "application/json",
-  },
-};
-
-const avatar = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-23/users/me/avatar",
+const dataFromServer = {
+  url: "https://mesto.nomoreparties.co/v1/cohort-23/",
   headers: {
     authorization: "28646914-f7f6-4f3a-9670-3cfb13a383dd",
     "Content-Type": "application/json",
@@ -56,88 +40,77 @@ const avatar = {
 };
 
 const cardPopup = new PopupWithImage(cardPopupSelector);
+const submitPopup = new PopupWithSubmit(confirmPopupSelector);
 
-const cardsApi = new Api(cards);
-const userApi = new Api(user);
-const avatarApi = new Api(avatar);
+const dataApi = new Api(dataFromServer);
 
 const validationEditProfile = new FormValidator(selectors, formProfile);
 const validationNewPlace = new FormValidator(selectors, formNewPost);
 const validationAvatar = new FormValidator(selectors, formAvatar);
 
-const defaultUser = new UserInfo(
-  profileName.textContent,
-  profileCaption.textContent
-);
+const defaultUser = new UserInfo(profileName, profileCaption, profilePic);
 
 function renderLoading(popupSelector, isLoading) {
   if (isLoading) {
-    document.querySelector(popupSelector).querySelector('.popup__save-btn').textContent = 'Сохранение...';
+    document.querySelector(popupSelector)
+    .querySelector('.popup__save-btn').textContent = 'Сохранение...';
   }
   else {
-    document.querySelector(popupSelector).querySelector('.popup__save-btn').textContent = 'Сохранить';
+    document.querySelector(popupSelector)
+    .querySelector('.popup__save-btn').textContent = 'Сохранить';
   }
 }
 
 //создание карточки
 function createCard(item, userId) {
-  return new Card(
+  const oneCard = new Card(
     {
       data: { item, currentUserId: userId },
       handleCardClick: () => {
         //что должно произойти при клике на картинку
         cardPopup.openImage(item.name, item.link);
       },
-      handleLikeClick: () => {
+
+      handleLikeClick: (card) => {
         //что должно произойти при клике на лайк
-
-        //если лайков нет, добавляем
-        if (item.likes.length === 0) {
-          cardsApi.likeCard(item._id)
-          .then((data) => renderCards(data))
-          .catch((err) => { console.log(err)});
-        }
-
-        item.likes.forEach((like) => {
-          //если мой лайк есть, то удаляем
-          if (like._id.includes(userId)) {
-            cardsApi.deleteLikeCard(item._id)
-            .then((data) => renderCards(data))
+        if (card.target.classList.contains('card__like-btn_active')) {
+        dataApi.deleteLikeCard(item._id)
+            .then(data => oneCard.updateCardLikes(data, true))
             .catch((err) => { console.log(err)});
-          } else {
-            //если моего лайка нет то добавляем
-            cardsApi.likeCard(item._id)
-            .then((data) => renderCards(data))
+        }
+          else {
+            dataApi.likeCard(item._id)
+            .then(data => oneCard.updateCardLikes(data))
             .catch((err) => { console.log(err)});
           }
-        });
       },
 
-      handleDeleteIconClick: () => {
+      handleDeleteIconClick: (card) => {
         //подтверждение удаления карточки
-        const submitPopup = new PopupWithSubmit(confirmPopupSelector, {
-          handleFormSubmit: () => {
-            cardsApi
-              .deleteCard(item._id)
-              .then(submitPopup.close())
-              .then((data) => renderCards(data))
-              .catch((err) => { console.log(err)});
-          },
-        });
-
-        submitPopup.setEventListeners();
         submitPopup.open();
+        submitPopup.confirmAction(() => {
+          dataApi.deleteCard(item._id)
+          .then(() => {
+            card.target.closest('.card').remove();
+            submitPopup.close();
+          })
+          .catch((err) => { console.log(err)});
+        })
       },
     },
     ".template-card"
   );
+return oneCard;
 }
 
-//добавляем в DOM карточки с сервера
+//добавляем в DOM карточки и данные пользователя
 function renderCards() {
-  Promise.all([cardsApi.getInfo(), userApi.getInfo()])
+  Promise.all([dataApi.getCardsInfo(), dataApi.getUserInfo()])
     .then((allData) => {
       const [initialCards, user] = allData;
+
+      defaultUser.setUserInfo(user.name, user.about, user.avatar);
+
       const userId = user._id;
       const cardList = new Section(
         {
@@ -156,29 +129,48 @@ function renderCards() {
 }
 renderCards();
 
-//функция вставляет в разметку данные профиля с сервера
-function getUserInfo() {
-  userApi.getInfo()
-  .then((user) => {
-    profilePic.src = user.avatar;
-    profileName.textContent = user.name;
-    profileCaption.textContent = user.about;
-  })
-  .catch((err) => { console.log(err)});
-}
-getUserInfo();
+//функция добавления новой карточки
+const newPostPopup = new PopupWithForm(newPostPopupSelector, {
+  handleFormSubmit: () => {
+    renderLoading(newPostPopupSelector, true);
+    dataApi.newCard({
+        name: cardNameInput.value,
+        link: cardLinkInput.value,
+      })
+      .then((card) => {
+        const newCardList = new Section(
+          {
+            data: card,
+            renderer: (item) => {
+              const card = createCard(item, item.owner._id);
+              const cardElement = card.generateCard();
+              newCardList.addItemToStart(cardElement);
+            },
+          },
+          cardContainer
+        );
+        newCardList.renderItem();
+    })
+      .catch((err) => { console.log(err)})
+      .finally(() => {
+        newPostPopup.close();
+        renderLoading(newPostPopupSelector, false)
+      })
+  },
+});
 
 //функция изменения данных профиля
 const profilePopup = new PopupWithForm(profilePopupSelector, {
   handleFormSubmit: () => {
     renderLoading(profilePopupSelector, true);
-    userApi.updateUserInfo({
+    dataApi.updateUserInfo({
         name: profileNameInput.value,
         about: profileCaptionInput.value,
       })
-      .then((data) => getUserInfo(data))
+      .then((user) => defaultUser.setUserInfo(user.name, user.about, user.avatar))
       .catch((err) => { console.log(err)})
       .finally(() => {
+        profilePopup.close();
         renderLoading(profilePopupSelector, false)
       })
   },
@@ -188,12 +180,13 @@ const profilePopup = new PopupWithForm(profilePopupSelector, {
 const avatarPopup = new PopupWithForm(avatarPopupSelector, {
   handleFormSubmit: () => {
     renderLoading(avatarPopupSelector, true);
-    avatarApi.updateAvatar({
+    dataApi.updateAvatar({
         avatar: profileAvatarInput.value,
       })
-      .then((data) => getUserInfo(data))
+      .then((user) => defaultUser.setUserInfo(user.name, user.about, user.avatar))
       .catch((err) => { console.log(err)})
       .finally(() => {
+        avatarPopup.close();
         renderLoading(avatarPopupSelector, false)
       })
   },
@@ -203,21 +196,7 @@ profileAvatar.addEventListener("click", () => {
   validationAvatar.resetValidation();
 });
 
-//функция добавления новой карточки
-const newPostPopup = new PopupWithForm(newPostPopupSelector, {
-  handleFormSubmit: () => {
-    renderLoading(newPostPopupSelector, true);
-    cardsApi.newCard({
-        name: cardNameInput.value,
-        link: cardLinkInput.value,
-      })
-      .then((data) => renderCards(data))
-      .catch((err) => { console.log(err)})
-      .finally(() => {
-        renderLoading(newPostPopupSelector, false)
-      })
-  },
-});
+
 
 //открытие формы изменения профиля
 editButton.addEventListener("click", () => {
@@ -244,3 +223,4 @@ profilePopup.setEventListeners();
 cardPopup.setEventListeners();
 newPostPopup.setEventListeners();
 avatarPopup.setEventListeners();
+submitPopup.setEventListeners();
