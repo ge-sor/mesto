@@ -42,9 +42,19 @@ export default class Card {
 
   }
 
-  deleteCard(evt) {
-    evt.target.closest('.card').remove();
+  isLiked() {
+   if (this._element
+          .querySelector(".card__like-btn")
+          .classList.contains('card__like-btn_active')) {
+            return true;
+          }
+    else return false
   }
+
+  remove() {
+    this._element.remove();
+  }
+
 
   generateCard() {
     this._element = this._getTemplate();

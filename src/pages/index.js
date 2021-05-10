@@ -73,7 +73,7 @@ function createCard(item, userId) {
 
       handleLikeClick: (card) => {
         //что должно произойти при клике на лайк
-        if (card.target.classList.contains('card__like-btn_active')) {
+        if (oneCard.isLiked())  {
         dataApi.deleteLikeCard(item._id)
             .then(data => oneCard.updateCardLikes(data, true))
             .catch((err) => { console.log(err)});
@@ -91,7 +91,7 @@ function createCard(item, userId) {
         submitPopup.confirmAction(() => {
           dataApi.deleteCard(item._id)
           .then(() => {
-            card.target.closest('.card').remove();
+            oneCard.remove();
             submitPopup.close();
           })
           .catch((err) => { console.log(err)});
@@ -151,11 +151,9 @@ const newPostPopup = new PopupWithForm(newPostPopupSelector, {
         );
         newCardList.renderItem();
     })
+      .then(() => { newPostPopup.close() })
       .catch((err) => { console.log(err)})
-      .finally(() => {
-        newPostPopup.close();
-        renderLoading(newPostPopupSelector, false)
-      })
+      .finally(() => { renderLoading(newPostPopupSelector, false) })
   },
 });
 
@@ -168,11 +166,9 @@ const profilePopup = new PopupWithForm(profilePopupSelector, {
         about: profileCaptionInput.value,
       })
       .then((user) => defaultUser.setUserInfo(user.name, user.about, user.avatar))
+      .then(() => { profilePopup.close() })
       .catch((err) => { console.log(err)})
-      .finally(() => {
-        profilePopup.close();
-        renderLoading(profilePopupSelector, false)
-      })
+      .finally(() => { renderLoading(profilePopupSelector, false) })
   },
 });
 
@@ -184,11 +180,9 @@ const avatarPopup = new PopupWithForm(avatarPopupSelector, {
         avatar: profileAvatarInput.value,
       })
       .then((user) => defaultUser.setUserInfo(user.name, user.about, user.avatar))
+      .then(() => { avatarPopup.close() })
       .catch((err) => { console.log(err)})
-      .finally(() => {
-        avatarPopup.close();
-        renderLoading(avatarPopupSelector, false)
-      })
+      .finally(() => { renderLoading(avatarPopupSelector, false) })
   },
 });
 profileAvatar.addEventListener("click", () => {
